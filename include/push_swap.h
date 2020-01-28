@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 18:37:06 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:44:51 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,10 @@ void			pa_above_pivot(t_stack *s, int32_t pivot, size_t limit);
 void			pivot_on_top_a(t_stack *s, int32_t pivot);
 void			pivot_on_top_b(t_stack *s, int32_t pivot);
 void			sort_sublist_on_b(t_stack *s);
-void			push_next_sublist_on_b(t_stack *s, size_t size);
+void			sort_sublist_on_a(t_stack *s, uint8_t start_or_end);
+void			push_next_sublist_on_a(t_stack *s, size_t size);
 void			rra_the_remainder(t_stack *s);
+void			perfect_sort_for_3(t_stack *s);
 
 /*
 ** ############################################################################

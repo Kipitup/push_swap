@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/01/24 18:04:00 by amartino         ###   ########.fr        #
+#    Updated: 2020/01/28 19:44:14 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -59,6 +59,7 @@ SRCS += push_swp
 SRCS += operation_on_stack
 SRCS += pivot_on_top
 SRCS += sublist_tools
+SRCS += perfect_sort
 
 # checker
 SRCS += checker

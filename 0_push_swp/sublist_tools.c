@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 17:46:14 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:26:40 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,44 @@ void		sort_sublist_on_b(t_stack *s)
 {
 	size_t		size;
 
-	// pause_and_show(s);
-	size = s->size_b;
-	while (s->size_b > 0)
-		pa_highest(s, s->size_b);
+	size = SUBLIST_MIN_SIZE;
 	while (size > 0)
 	{
-		ra(s);
+		pa_highest(s, s->size_b);
 		size--;
 	}
+	ft_printf("sort_sublist_on_b\n");
+	pause_and_show(s);
 }
 
-void		push_next_sublist_on_b(t_stack *s, size_t size)
+void		sort_sublist_on_a(t_stack *s, uint8_t start_or_end)
+{
+	size_t		size;
+
+	if (start_or_end == END)
+	{
+		size = SUBLIST_MIN_SIZE;
+		while (size > 0)
+		{
+			rra(s);
+			size--;
+		}
+
+	}
+	perfect_sort_for_3(s);
+	ft_printf("sort_sublist_on_a\n");
+	pause_and_show(s);
+}
+
+void		push_next_sublist_on_a(t_stack *s, size_t size)
 {
 	while (size > 0)
 	{
-		pb(s);
+		pa(s);
 		size--;
 	}
+	ft_printf("push_next_sublist_on_a\n");
+	pause_and_show(s);
 }
 
 void		rra_the_remainder(t_stack *s)
