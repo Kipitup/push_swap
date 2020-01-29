@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 15:34:43 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/29 19:12:39 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,14 @@ void			push_swp(t_stack *s, int ac, char **av);
 int8_t			solve(t_stack *s);
 void			pb_lowest(t_stack *s, size_t limit);
 void			pa_highest(t_stack *s, size_t limit);
-void			pb_under_pivot(t_stack *s, int32_t pivot, size_t limit);
-void			pa_above_pivot(t_stack *s, int32_t pivot, size_t limit);
+void			pb_under_pivot(t_stack *s, size_t pivot_index, size_t limit);
+void			pa_above_pivot(t_stack *s, size_t pivot_index, size_t limit);
 void			pivot_on_top_a(t_stack *s, int32_t pivot);
 void			pivot_on_top_b(t_stack *s, int32_t pivot);
 void			sort_sublist_on_b(t_stack *s);
-void			push_next_sublist_on_b(t_stack *s, size_t size);
-void			rra_the_remainder(t_stack *s);
+void			sort_sublist_on_a(t_stack *s);
+int8_t			push_next_sublist_on_a(t_stack *s, size_t size);
+void			perfect_sort_for_3(t_stack *s);
 
 /*
 ** ############################################################################

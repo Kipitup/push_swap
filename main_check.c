@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:57:10 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/27 17:39:15 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:45:30 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int			main(int ac, char **av)
 		s = init_struct(av, ac);
 		if (s == NULL)
 			return (SUCCESS);
+		perfect_sort_for_3(s);
 		if (s->verbose == TRUE)
 			print_stack(s, NO_OPE, 0);
 		read_checker(s);

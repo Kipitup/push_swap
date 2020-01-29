@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 17:46:14 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/29 19:46:08 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,49 @@
 
 void		sort_sublist_on_b(t_stack *s)
 {
-	size_t		size;
-
-	// pause_and_show(s);
-	size = s->size_b;
 	while (s->size_b > 0)
 		pa_highest(s, s->size_b);
-	while (size > 0)
-	{
-		ra(s);
-		size--;
-	}
 }
 
-void		push_next_sublist_on_b(t_stack *s, size_t size)
+void		sort_sublist_on_a(t_stack *s)
 {
-	while (size > 0)
+	size_t 		limit;
+
+	if (ft_high(s->a, s->size_a) != s->a[0] && s->size_a > SUBLIST_MIN_SIZE)
 	{
-		pb(s);
-		size--;
+		limit = SUBLIST_MIN_SIZE;
+		while (limit > 0)
+		{
+			rra(s);
+			limit--;
+		}
 	}
+	perfect_sort_for_3(s);
 }
 
-void		rra_the_remainder(t_stack *s)
+int8_t		push_next_sublist_on_a(t_stack *s, size_t size)
 {
-	size_t		remainder_size;
-	size_t		largest_sublist;
+	size_t		max_size;
+	size_t		position;
+	ssize_t	 	pivot_index;
 
-	largest_sublist = SUBLIST_MIN_SIZE * ft_pow_positive(2, s->exponent_max);
-	remainder_size = s->size_a + s->size_b - largest_sublist;
-	while (remainder_size > 0)
+
+	max_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, (s->exponent_max - 1));
+	if (max_size == size)
 	{
-		rra(s);
-		remainder_size--;
+		position = s->size_b - size;
+		pivot_index = ft_get_n_smallest(s->b, position, START, s->size_b);
+		if (pivot_index == FAILURE)
+			return (ft_print_err_failure(MALLOC_PIVOT, STD_ERR));
+		pa_above_pivot(s, (size_t)pivot_index, s->size_b);
 	}
+	else
+	{
+		while (size > 0)
+		{
+			pa(s);
+			size--;
+		}
+	}
+	return (SUCCESS);
 }
