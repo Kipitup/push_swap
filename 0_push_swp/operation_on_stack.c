@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 18:34:04 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/28 16:57:38 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:35:07 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,45 @@ void	pa_highest(t_stack *s, size_t limit)
 	pa(s);
 }
 
-void	pb_under_pivot(t_stack *s, int32_t pivot, size_t limit)
+void	pb_under_pivot(t_stack *s, size_t pivot_index, size_t limit)
 {
-	size_t	last;
+	size_t		last;
+	int32_t		pivot;
+	uint8_t		start_or_end;
 
+	pivot = s->a[pivot_index];
+	if (pivot_index < limit && limit < s->size_a)
+		start_or_end = START;
+	else
+		start_or_end = END;
 	while (limit > 0)
 	{
 		last = s->size_a - 1;
-		s->a[last] < pivot ? pb(s) : ra(s);
+		if (start_or_end == END)
+		{
+			s->a[last] <= pivot ? pb(s) : ra(s);
+		}
+		else
+		{
+			rra(s);
+			if (s->a[last] <= pivot)
+				pb(s);
+
+		}
 		limit--;
 	}
 }
 
-void	pa_above_pivot(t_stack *s, int32_t pivot, size_t limit)
+void	pa_above_pivot(t_stack *s, size_t pivot_index, size_t limit)
 {
 	size_t	last;
+	int32_t pivot;
 
+	pivot = s->b[pivot_index];
 	while (limit > 0)
 	{
 		last = s->size_b - 1;
-		s->b[last] >= pivot ? pa(s) : rb(s);
+		s->b[last] > pivot ? pa(s) : rb(s);
 		limit--;
 	}
 }

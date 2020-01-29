@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 19:27:04 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/28 19:54:39 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/29 12:24:35 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	perfect_sort_for_3_bis(t_stack *s, size_t one, size_t two, size_t three)
 		sa(s);
 		rra(s);
 	}
+	else if (one < two && two < three)
+		return ;
 	else
 		ft_printf("not yet\n");
 }

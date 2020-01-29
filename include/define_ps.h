@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/28 19:22:44 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:32:17 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define STACK_A			0
 # define STACK_B			1
 # define SUBLIST_MIN_SIZE	3
+# define NONE				-1
 
 # define SA					"sa"
 # define SB					"sb"
@@ -45,5 +46,7 @@
 # define RRA				"rra"
 # define RRB				"rrb"
 # define RRR				"rrr"
+
+# define MALLOC_PIVOT		"memory allocation failed when finding pivot index"
 
 #endif
