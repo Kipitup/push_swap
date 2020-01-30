@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/01/28 19:44:14 by amartino         ###   ########.fr        #
+#    Updated: 2020/01/30 19:17:14 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -57,7 +57,6 @@ MAIN_CHECK = main_check
 # push_swap
 SRCS += push_swp
 SRCS += operation_on_stack
-SRCS += pivot_on_top
 SRCS += sublist_tools
 SRCS += perfect_sort
 
@@ -90,10 +89,12 @@ SRCS += output_file
                      #       	  VARIABLES    			#
                      #                   				#
                      ####################################
+nb ?= 50
 T ?= sample
 VAL ?= no
 REQUEST = 'read -p "Enter a commit message:" pwd; echo $$pwd'
 COMMIT_MESSAGE ?= $(shell bash -c $(REQUEST))
+ARG=`ruby -e "puts (0..$(nb) - 1).to_a.shuffle.join(' ')"`
 
                      ####################################
                      #                   				#
@@ -138,8 +139,12 @@ $(OBJS): $(BUILD_DIR)%.o: %.c $(HEAD) Makefile
 $(LIB_PATH): FORCE
 	make -C $(LIB_DIR)
 
-t: all $(VAL)
-	$(VALGRIND) ./ft_printf examples/$(T) #to be changed
+unit_test:
+	./$(NAME_PUSH_SWP) $(ARG)
+
+run: all
+	$(MAKE) unit_test
+	ls -t result
 
 clean:
 	rm -f $(OBJS)
@@ -155,7 +160,8 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean all re t FORCE git
-.SILENT: $(NAME) $(OBJS) $(BUILD_DIR) $(MAIN_OBJ_PS) $(MAIN_OBJ_C) $(LIB_PATH) clean fclean re t FORCE
+.SILENT: $(NAME) $(OBJS) $(BUILD_DIR) $(MAIN_OBJ_PS) $(MAIN_OBJ_C)
+		$(LIB_PATH) clean fclean re t FORCE run unit_test
 FORCE:
 
 

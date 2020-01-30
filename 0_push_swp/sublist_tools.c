@@ -6,40 +6,28 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/29 20:23:28 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/30 19:43:37 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_sublist_on_b(t_stack *s)
+void		sort_sublist_on_b(t_stack *s, size_t size)
 {
-	size_t		size;
-
-	size = SUBLIST_MIN_SIZE;
+	if (size == (SUBLIST_MIN_SIZE / 2))
+	{
+		if (ft_high(s->a, s->size_a) == s->a[0] && s->size_a > SUBLIST_MIN_SIZE)
+			perfect_sort_for_3_on_top_of_a(s);
+		else
+			perfect_sort_for_3_at_the_bottom_of_a(s);
+		pause_and_show(s);
+	}
 	while (size > 0)
 	{
 		pa_highest(s, s->size_b);
 		size--;
 	}
-	ft_printf("sort_sublist_on_b\n");
 	pause_and_show(s);
-}
-
-void		sort_sublist_on_a(t_stack *s)
-{
-	size_t 		limit;
-
-	if (ft_high(s->a, s->size_a) != s->a[0] && s->size_a > SUBLIST_MIN_SIZE)
-	{
-		limit = SUBLIST_MIN_SIZE;
-		while (limit > 0)
-		{
-			rra(s);
-			limit--;
-		}
-	}
-	perfect_sort_for_3(s);
 }
 
 int8_t		push_next_sublist_on_a(t_stack *s, size_t size)
@@ -66,7 +54,6 @@ int8_t		push_next_sublist_on_a(t_stack *s, size_t size)
 			size--;
 		}
 	}
-	ft_printf("push_next_sublist_on_a\n");
 	pause_and_show(s);
 	return (SUCCESS);
 }

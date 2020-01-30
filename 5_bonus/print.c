@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:23:57 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/24 12:52:23 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/30 17:10:05 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	pause_and_show(t_stack *s)
 	char	*line;
 
 	line = NULL;
-	// (void)s;
+	if (PAUSE_AND_SHOW == OFF)
+		return ;
 	print_stack(s, NO_OPE, 0);
 	get_next_line(0, &line);
 	ft_strdel(&line);

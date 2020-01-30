@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/29 19:12:39 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:56:28 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,13 @@ uint8_t			check_for_bonus(char **tab, char *chr);
 */
 void			push_swp(t_stack *s, int ac, char **av);
 int8_t			solve(t_stack *s);
-void			pb_lowest(t_stack *s, size_t limit);
 void			pa_highest(t_stack *s, size_t limit);
-void			pb_under_pivot(t_stack *s, size_t pivot_index, size_t limit);
+int8_t			pb_under_pivot(t_stack *s, size_t nth, size_t limit);
 void			pa_above_pivot(t_stack *s, size_t pivot_index, size_t limit);
-void			pivot_on_top_a(t_stack *s, int32_t pivot);
-void			pivot_on_top_b(t_stack *s, int32_t pivot);
-void			sort_sublist_on_b(t_stack *s);
-void			sort_sublist_on_a(t_stack *s);
+void			sort_sublist_on_b(t_stack *s, size_t size);
 int8_t			push_next_sublist_on_a(t_stack *s, size_t size);
-void			perfect_sort_for_3(t_stack *s);
+void			perfect_sort_for_3_on_top_of_a(t_stack *s);
+void			perfect_sort_for_3_at_the_bottom_of_a(t_stack *s);
 
 /*
 ** ############################################################################

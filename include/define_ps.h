@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/29 20:08:41 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/30 19:49:35 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define START				0
 # define END				1
 
+# define PAUSE_AND_SHOW		OFF
 # define VERBOSE 			0
 # define NB_OPE				11
 # define NO_OPE				-1
