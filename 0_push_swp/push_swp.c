@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:28:51 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/30 19:49:29 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/30 20:16:04 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ int8_t		let_the_magic_of_recursion_happen(t_stack *s, size_t exponent, size_t ex
 
 int8_t		sort_remainder(t_stack *s)
 {
+	size_t		size;
+	size_t		nth;
+	ssize_t	 	pivot_index;
 	int8_t		ret;
 
 	ret = SUCCESS;
@@ -76,9 +79,32 @@ int8_t		sort_remainder(t_stack *s)
 		s->exponent_max++;
 	if (s->exponent_max > 0)
 	{
-		ret = let_the_magic_of_recursion_happen(s, (s->exponent_max - 1), (s->exponent_max - 1));
+		ft_printf("s->exponent_max %zu\n", s->exponent_max);
+		pause_and_show(s);
+
+		size = SUBLIST_MIN_SIZE * ft_pow_positive(2, (s->exponent_max - 1));
+		nth = s->size_b - size;
+		pivot_index = ft_get_n_smallest(s->b, nth, START, s->size_b);
+		if (pivot_index == FAILURE)
+			return (ft_print_err_failure(MALLOC_PIVOT, STD_ERR));
+		pa_above_pivot(s, (size_t)pivot_index, s->size_b);
+
+		ft_printf("size %zu\n", size);
+		pause_and_show(s);
+
+		if (ret == SUCCESS)
+			ret = organize_a_in_unsorted_sublist(s, (s->size_a - size));
+		if (ret == SUCCESS)
+			ret = pb_under_pivot(s, (SUBLIST_MIN_SIZE / 2), SUBLIST_MIN_SIZE);
+		sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
+
 		if (s->exponent_max > 1 && ret == SUCCESS)
-			ret = let_the_magic_of_recursion_happen(s, (s->exponent_max - 1), (s->exponent_max - 1));
+		{
+			pause_and_show(s);
+			ret = let_the_magic_of_recursion_happen(s, 0, (s->exponent_max - 2));
+		}
+		if (ret == SUCCESS)
+			ret = sort_remainder(s);
 	}
 	return (ret);
 }
@@ -96,7 +122,7 @@ int8_t		solve(t_stack *s)
 			ret = pb_under_pivot(s, (s->size_a / 2), s->size_a);
 		sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
 		if (s->exponent_max > 1 && ret == SUCCESS)
-			ret = let_the_magic_of_recursion_happen(s, 0, (s->exponent_max - 1));
+			ret = let_the_magic_of_recursion_happen(s, 0, (s->exponent_max - 2));
 		sort_remainder(s);
 	}
 	if (ret == SUCCESS)

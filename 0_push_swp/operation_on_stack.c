@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 18:34:04 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/30 16:28:09 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/30 19:56:44 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int8_t	pb_under_pivot(t_stack *s, size_t nth, size_t limit)
 	int32_t		pivot;
 	uint8_t		start_or_end;
 
-	pause_and_show(s);
+	// pause_and_show(s);
 	pivot_index = ft_get_n_smallest(s->a, nth, START, s->size_a);
 	if (pivot_index == FAILURE)
 		return (ft_print_err_failure(MALLOC_PIVOT, STD_ERR));
