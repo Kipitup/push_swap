@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 12:51:43 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 15:28:11 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@
 
 typedef struct	s_stack
 {
-	int32_t	*a;
-	int32_t	*b;
-	int32_t *sorted_s;
-	size_t	size_a;
-	size_t	size_b;
-	int32_t	color_nb;
-	uint8_t	exponent_max;
-	int8_t	fd;
-	uint8_t	verbose;
-	uint8_t	color;
+	int32_t		*a;
+	int32_t		*b;
+	t_vector	*result;
+	size_t		size_a;
+	size_t		size_b;
+	int32_t		color_nb;
+	uint8_t		exponent_max;
+	uint8_t		verbose;
+	uint8_t		color;
 }				t_stack;
 
 typedef struct 	s_stat
@@ -76,7 +75,7 @@ uint8_t			check_for_bonus(char **tab, char *chr);
 */
 void			push_swp(t_stack *s, int ac, char **av);
 int8_t			solve(t_stack *s);
-void			solve_when_too_small(t_stack *s);
+int8_t			solve_when_too_small(t_stack *s);
 void			pa_highest(t_stack *s, size_t limit);
 int8_t			pb_under_pivot(t_stack *s, size_t nth, size_t limit);
 int8_t			pa_above_pivot(t_stack *s, size_t nth, size_t limit);
@@ -84,6 +83,7 @@ void			sort_sublist_on_b(t_stack *s, size_t size);
 int8_t			push_next_sublist_on_a(t_stack *s, size_t size);
 void			perfect_sort_for_3_on_top_of_a(t_stack *s);
 void			perfect_sort_for_3_at_the_bottom_of_a(t_stack *s);
+void 			perfect_sort_for_size_a_3(t_stack *s);
 
 /*
 ** ############################################################################

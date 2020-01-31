@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 12:58:24 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/23 21:09:21 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 16:50:50 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,7 @@ int					get_next_line(const int fd, char **line);
 ** ############################################################################
 */
 
-int64_t				ft_absolute(int64_t nb);
 size_t				ft_nb_unitlen(int nb);
-int					ft_fibonacci(int index);
 int					ft_atoi(const char *str);
 int64_t				ft_atol(const char *str);
 char				*ft_itoa(int64_t n);
@@ -149,8 +147,6 @@ char				*ft_itoa_base(int64_t n, uint8_t base);
 char				*ft_u_itoa_base(uint64_t n, uint8_t base);
 char				*ft_itoa_base_maj(uint64_t n, uint8_t base, uint64_t flag);
 char				*ft_ox_itoa_base(uint64_t n, uint8_t base, uint64_t flag);
-double				ft_pow(double x, double exponent);
-unsigned long		ft_pow_positive(unsigned long x, unsigned long exponent);
 size_t				ft_uint64_t_len(uint64_t num, uint8_t base);
 size_t				ft_int64_t_len(int64_t num, uint8_t base);
 size_t				ft_len_printf(uint64_t value, uint64_t flag, size_t len);
@@ -172,7 +168,18 @@ int32_t				*ft_sort(int32_t *tab, size_t size);
 
 /*
 ** ############################################################################
-** ########################### WRITE OPERATION ################################
+** ################################## MATH ####################################
+** ############################################################################
+*/
+int64_t				ft_absolute(int64_t nb);
+int					ft_fibonacci(int index);
+double				ft_pow(double x, double exponent);
+unsigned long		ft_pow_positive(unsigned long x, unsigned long exponent);
+uint32_t			ft_log2_n(uint32_t nb);
+
+/*
+** ############################################################################
+** ############################ WRITE OPERATION ###############################
 ** ############################################################################
 */
 void				ft_putchar(char c);

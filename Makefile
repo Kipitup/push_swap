@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/01/30 20:18:26 by amartino         ###   ########.fr        #
+#    Updated: 2020/01/31 17:06:06 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -144,7 +144,6 @@ unit_test:
 
 run: all
 	$(MAKE) unit_test
-	rm result/tmp.txt
 	ls -t result
 
 clean:

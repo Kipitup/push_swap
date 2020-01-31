@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 12:52:30 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 14:41:08 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,24 @@ int8_t		push_next_sublist_on_a(t_stack *s, size_t size)
 	return (SUCCESS);
 }
 
-void		solve_when_too_small(t_stack *s)
+int8_t		solve_when_too_small(t_stack *s)
 {
-	while (s->size_a > 0)
-		pb(s);
-	while (s->size_b > 0)
-		pa_highest(s, s->size_b);
+	if (s->size_a == 1)
+		return (SUCCESS);
+	else if (s->size_a == 2)
+	{
+		if (s->a[0] < s->a[1])
+			sa(s);
+	}
+	else if (s->size_a == 3)
+		perfect_sort_for_size_a_3(s);
+	else
+	{
+		if (pb_under_pivot(s, (s->size_a - 3), s->size_a) == FAILURE)
+			return (FAILURE);
+		perfect_sort_for_size_a_3(s);
+		while (s->size_b > 0)
+			pa_highest(s, s->size_b);
+	}
+	return (SUCCESS);
 }

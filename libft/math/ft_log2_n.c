@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_chr.c                                          :+:      :+:    :+:   */
+/*   ft_log2_n.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 11:55:59 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 18:55:22 by amartino         ###   ########.fr       */
+/*   Created: 2020/01/31 16:36:27 by amartino          #+#    #+#             */
+/*   Updated: 2020/01/31 17:04:52 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "libft.h"
 
-/*
-**	Search a character in the string and return the index of the first match
-**	it find.
-*/
-
-ssize_t	vct_chr(t_vector *vector, char c)
+uint32_t	ft_log2_n(uint32_t nb)
 {
-	size_t	index;
-
-	index = 0;
-	while (index <= vector->len)
-	{
-		if (vector->str[index] == c)
-			return (index);
-		index++;
-	}
-	return (FAILURE);
+	return (nb > 1 ? 1 + ft_log2_n(nb / 2) : 0);
 }

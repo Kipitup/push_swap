@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_chr.c                                          :+:      :+:    :+:   */
+/*   vct_chr_count.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 11:55:59 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 18:55:22 by amartino         ###   ########.fr       */
+/*   Created: 2020/01/31 18:51:15 by amartino          #+#    #+#             */
+/*   Updated: 2020/01/31 18:57:22 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
 /*
-**	Search a character in the string and return the index of the first match
-**	it find.
+**	Search a character in the string and return number of match found.
 */
 
-ssize_t	vct_chr(t_vector *vector, char c)
+size_t	vct_chr_count(t_vector *vector, char c)
 {
 	size_t	index;
+	size_t	count;
 
 	index = 0;
+	count = 0;
 	while (index <= vector->len)
 	{
 		if (vector->str[index] == c)
-			return (index);
+			count++;
 		index++;
 	}
-	return (FAILURE);
+	return (count);
 }

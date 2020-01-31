@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:43 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 15:15:10 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 17:49:31 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_stack		*fill_stack(t_stack *s, size_t start, char **tab, size_t len)
 	size_t		i;
 
 	i = 0;
-	if (s->a == NULL || s->b == NULL)
-		clean_struct(&s);
 	while (len > start && s != NULL)
 	{
 		len--;
@@ -40,9 +38,11 @@ t_stack		*fill_stack(t_stack *s, size_t start, char **tab, size_t len)
 			s->a[i] = (int)tmp;
 		i++;
 	}
-	if (s != NULL && check_no_double(s) == FALSE)
+	if (s == NULL)
+		return (ft_print_err_null(INT_MAX_MIN, STD_ERR));
+	if (check_no_double(s) == FALSE)
 		clean_struct(&s);
-	return (s == NULL ? ft_print_err_null("Double nb / INT MAX/MIN", STD_ERR) : s);
+	return (s == NULL ? ft_print_err_null(NB_DUPLICATE, STD_ERR) : s);
 }
 
 t_stack		*create_stack(char **tab, size_t len)
@@ -53,19 +53,20 @@ t_stack		*create_stack(char **tab, size_t len)
 	s = NULL;
 	start = parse_args(tab, len);
 	if (start == FAILURE)
-		return (ft_print_err_null("Wrong input format", STD_ERR));
+		return (ft_print_err_null(WRONG_INPUT, STD_ERR));
 	s = ft_memalloc(sizeof(t_stack));
 	if (s == NULL)
-		return (ft_print_err_null("memory allocation failed", STD_ERR));
+		return (ft_print_err_null(MALLOC_STRUCT, STD_ERR));
+	fill_in_static_variable(s, tab, (len - (size_t)start));
 	s->a = ft_memalloc(sizeof(int) * (len - start));
 	s->b = ft_memalloc(sizeof(int) * (len - start));
-	fill_in_static_variable(s, tab, (len - (size_t)start));
-	s = fill_stack(s, start, tab, len);
-	if (s == NULL)
-		return (ft_print_err_null("memory allocation failed", STD_ERR));
-	s->sorted_s = ft_sort(s->a, s->size_a);
-	if (s->sorted_s == NULL)
+	s->result = vct_new(ft_log2_n(s->size_a) * (3 * s->size_a));
+	if (s->a == NULL || s->b == NULL || s->result == NULL)
+	{
 		clean_struct(&s);
+		return (ft_print_err_null(MALLOC_STACK, STD_ERR));
+	}
+	s = fill_stack(s, start, tab, len);
 	return (s);
 }
 
@@ -82,7 +83,7 @@ t_stack		*init_struct(char **av, int ac)
 	{
 		tmp = ft_strsplit(av[0], ' ');
 		if (tmp == NULL)
-			return (ft_print_err_null("memory allocation failed", STD_ERR));
+			return (ft_print_err_null(MALLOC_ERR, STD_ERR));
 		while (tmp[i] != '\0')
 			i++;
 		s = create_stack(tmp, i);

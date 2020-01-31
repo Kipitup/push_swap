@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_both.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkante <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 19:28:01 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/15 19:29:46 by fkante           ###   ########.fr       */
+/*   Updated: 2020/01/31 17:03:40 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	swap_both(t_stack *s)
 void	ss(t_stack *s)
 {
 	swap_both(s);
-	ft_putendl_fd("ss", s->fd);
+	vct_addstr(s->result, "ss\n");
 }

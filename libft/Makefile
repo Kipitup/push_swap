@@ -6,7 +6,7 @@
 #    By: fkante <fkante@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/19 17:11:38 by fkante            #+#    #+#              #
-#    Updated: 2020/01/30 17:16:16 by amartino         ###   ########.fr        #
+#    Updated: 2020/01/31 19:04:23 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SRCS += ft_fldtoa.c
 SRCS += get_next_line.c
 SRCS += ft_printf.c
 SRCS += ft_atol.c
+SRCS += ft_log2_n.c
 
 #------------------------------------ STAT ------------------------------------#
 SRCS += ft_get_high.c
@@ -153,6 +154,8 @@ SRCS += vct_chr_str.c
 SRCS += vct_getchar_at.c
 SRCS += vct_print.c
 SRCS += vct_addnb.c
+SRCS += vct_chr_count.c
+SRCS += vct_chr_str_count.c
 
 #----------------------------------- BTREE ------------------------------------#
 SRCS += heap_build.c
@@ -179,6 +182,7 @@ PATH_SRCS += ./number
 PATH_SRCS += ./string
 PATH_SRCS += ./memory
 PATH_SRCS += ./print
+PATH_SRCS += ./math
 PATH_SRCS += .
 
 vpath %.c $(PATH_SRCS)

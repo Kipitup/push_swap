@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 12:49:46 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 17:59:25 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define TRUE				1
 # define SUCCESS			0
 # define FAILURE			-1
-# define MALLOC_ERR			-1
 # define TEST_ERR			-1
 # define INPUT_ERR			-1
 # define FD_ERR				-1
@@ -28,12 +27,12 @@
 # define END				1
 
 # define PAUSE_AND_SHOW		OFF
+# define SUBLIST_MIN_SIZE	6
 # define VERBOSE 			0
 # define NB_OPE				11
 # define NO_OPE				-1
 # define STACK_A			0
 # define STACK_B			1
-# define SUBLIST_MIN_SIZE	6
 # define NONE				-1
 
 # define SA					"sa"
@@ -49,5 +48,12 @@
 # define RRR				"rrr"
 
 # define MALLOC_PIVOT		"memory allocation failed when finding pivot index"
+# define WRONG_INPUT		"Wrong input format. Please put only numbers in numeric format"
+# define INT_MAX_MIN		"You can only give me int. Please do not exceed"
+# define NB_DUPLICATE		"Duplicates numbers are strictly forbidden. Please respect my rules"
+# define MALLOC_ERR			"memory allocation failed"
+# define MALLOC_SPLIT_AV	"memory allocation failed when ft_strsplit av"
+# define MALLOC_STRUCT		"memory allocation failed with the structure s"
+# define MALLOC_STACK		"memory allocation failed with the stack"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 11:02:18 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 12:54:14 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:10:03 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,19 @@ void		push_swp(t_stack *s, int ac, char **av)
 		return ;
 	stat = get_stat(s);
 	mkdir("result", 0700);
-	s->fd = open("result/tmp.txt", O_RDWR | O_CREAT | O_TRUNC, 0744);
-	if (s->fd == FAILURE)
-	{
-		clean_struct(&s);
-		return (ft_print_err_void("when creating result file", STD_ERR));
-	}
 	s->verbose = TRUE;
 	s->color = TRUE;
 	if (s->exponent_max == 0)
 	{
-		solve_when_too_small(s);
-		save_final_result_in_file(s);		
+		if (solve_when_too_small(s) == SUCCESS)
+			save_final_result_in_file(s);
 	}
 	else
 		if (solve(s) == SUCCESS)
 			save_final_result_in_file(s);
-	print_stack(s, NO_OPE, 0);
+	ft_printf("%s", vct_getstr(s->result));
+	ft_printf("\nra/nrra number : %d\n", vct_chr_str_count(s->result, "\nra\nrra\n"));
+	// print_stack(s, NO_OPE, 0);
 	clean_struct(&s);
 	ft_memdel((void**)&stat);
 }

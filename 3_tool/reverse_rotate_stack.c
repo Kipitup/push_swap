@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate_stack.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkante <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 20:01:39 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/15 20:04:58 by fkante           ###   ########.fr       */
+/*   Updated: 2020/01/31 17:02:46 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void		reverse_rotate_stack_b(t_stack *s)
 void	rra(t_stack *s)
 {
 	reverse_rotate_stack_a(s);
-	ft_putendl_fd("rra", s->fd);
+	vct_addstr(s->result, "rra\n");
 }
 
 void	rrb(t_stack *s)
 {
 	reverse_rotate_stack_b(s);
-	ft_putendl_fd("rrb", s->fd);
+	vct_addstr(s->result, "rrb\n");
 }

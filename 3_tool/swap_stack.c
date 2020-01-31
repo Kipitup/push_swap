@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:26:28 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/15 19:29:53 by fkante           ###   ########.fr       */
+/*   Updated: 2020/01/31 17:03:53 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	swap_stack_b(t_stack *s)
 void	sa(t_stack *s)
 {
 	swap_stack_a(s);
-	ft_putendl_fd("sa", s->fd);
+	vct_addstr(s->result, "sa\n");
 }
 
 void	sb(t_stack *s)
 {
 	swap_stack_b(s);
-	ft_putendl_fd("sb", s->fd);
+	vct_addstr(s->result, "sb\n");
 }

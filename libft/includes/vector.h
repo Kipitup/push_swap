@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:25:09 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/20 11:45:59 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:03:59 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,9 @@ int8_t			vct_fill_before(t_vector *vector, char c, size_t nbr);
 **********************
 */
 ssize_t			vct_chr(t_vector *vector, char c);
+size_t			vct_chr_count(t_vector *vector, char c);
 ssize_t			vct_chr_str(t_vector *vector, char *find);
+size_t			vct_chr_str_count(t_vector *vector, char *find);
 int8_t			vct_replace_char(t_vector *vector, char c, char replace);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 15:25:33 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/15 19:30:06 by fkante           ###   ########.fr       */
+/*   Updated: 2020/01/31 17:02:15 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	push_stack_b(t_stack *s)
 void	pa(t_stack *s)
 {
 	push_stack_a(s);
-	ft_putendl_fd("pa", s->fd);
+	vct_addstr(s->result, "pa\n");
 }
 
 void	pb(t_stack *s)
 {
 	push_stack_b(s);
-	ft_putendl_fd("pb", s->fd);
+	vct_addstr(s->result, "pb\n");
 }
