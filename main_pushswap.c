@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 11:02:18 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/30 17:27:35 by amartino         ###   ########.fr       */
+/*   Updated: 2020/01/31 12:54:14 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void		push_swp(t_stack *s, int ac, char **av)
 
 	stat = NULL;
 	s = init_struct(av, ac);
-	s->verbose = TRUE;
-	s->color = TRUE;
 	if (s == NULL)
 		return ;
 	stat = get_stat(s);
@@ -30,12 +28,17 @@ void		push_swp(t_stack *s, int ac, char **av)
 		clean_struct(&s);
 		return (ft_print_err_void("when creating result file", STD_ERR));
 	}
-	if (solve(s) == FAILURE)
-		return ; //need protection, clean and quit
-	if (s->verbose == TRUE)
-		print_stack(s, NO_OPE, 0);
-	ft_printf("gonna save result\n");
-	save_final_result_in_file(s);
+	s->verbose = TRUE;
+	s->color = TRUE;
+	if (s->exponent_max == 0)
+	{
+		solve_when_too_small(s);
+		save_final_result_in_file(s);		
+	}
+	else
+		if (solve(s) == SUCCESS)
+			save_final_result_in_file(s);
+	print_stack(s, NO_OPE, 0);
 	clean_struct(&s);
 	ft_memdel((void**)&stat);
 }
