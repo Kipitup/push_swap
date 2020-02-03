@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:25:09 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 19:03:59 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/03 15:11:23 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void			vct_pop_from(t_vector *vector, size_t len, size_t index);
 **********************
 */
 t_vector		*vct_dup(t_vector *vector);
+t_vector		*vct_ndup(t_vector *vector, size_t index);
 int8_t			vct_cat(t_vector *dest, t_vector *src);
 t_vector		*vct_join(t_vector *dest, t_vector *src);
 t_vector		*vct_joinfree(t_vector **dest, t_vector **src,
@@ -127,7 +128,8 @@ ssize_t			vct_chr(t_vector *vector, char c);
 size_t			vct_chr_count(t_vector *vector, char c);
 ssize_t			vct_chr_str(t_vector *vector, char *find);
 size_t			vct_chr_str_count(t_vector *vector, char *find);
-int8_t			vct_replace_char(t_vector *vector, char c, char replace);
+ssize_t			vct_replace_char(t_vector *vector, char c, char replace);
+ssize_t			vct_replace_str(t_vector *vector, char *str, char *replace);
 
 /*
 **********************
@@ -146,7 +148,6 @@ t_vector		*ft_fldtoa(long double val, uint64_t preci, uint32_t opt);
 
 /*
 ** vct_print
-** vct_ndup
 ** vct_trim
 ** vct_split
 ** vct_splitchr

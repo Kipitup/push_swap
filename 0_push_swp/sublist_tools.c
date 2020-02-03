@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 14:41:08 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/03 21:57:07 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void		sort_sublist_on_b(t_stack *s, size_t size)
 			perfect_sort_for_3_on_top_of_a(s);
 		else
 			perfect_sort_for_3_at_the_bottom_of_a(s);
-		pause_and_show(s);
+		// pause_and_show(s);
 	}
 	while (size > 0)
 	{
 		pa_highest(s, s->size_b);
 		size--;
 	}
-	pause_and_show(s);
+	// pause_and_show(s);
 }
 
 int8_t		push_next_sublist_on_a(t_stack *s, size_t size)
@@ -51,6 +51,8 @@ int8_t		push_next_sublist_on_a(t_stack *s, size_t size)
 		while (size > 0)
 		{
 			pa(s);
+			// ft_printf("pa");
+			pause_and_show(s);
 			size--;
 		}
 	}

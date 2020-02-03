@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 11:02:18 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 10:31:32 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/03 21:27:29 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,23 @@
 
 void		push_swp(t_stack *s, int ac, char **av)
 {
-	t_stat		*stat;
+	int8_t		ret;
 
-	stat = NULL;
 	s = init_struct(av, ac);
 	if (s == NULL)
 		return ;
-	stat = get_stat(s);
 	mkdir("result", 0700);
-	s->verbose = TRUE;
 	s->color = TRUE;
-	if (s->exponent_max == 0)
+	s->verbose = TRUE;
+	ret = s->exponent_max == 0 ? solve_when_too_small(s) : solve(s);
+	if (ret == SUCCESS)
 	{
-		if (solve_when_too_small(s) == SUCCESS)
-			save_final_result_in_file(s);
+		optimize_result(s->result);
+		save_final_result_in_file(s);
 	}
-	else
-		if (solve(s) == SUCCESS)
-			save_final_result_in_file(s);
-	ft_printf("%s", vct_getstr(s->result));
-	// ft_printf("\nra/nrra number : %d\n", vct_chr_str_count(s->result, "\nra\nrra\n"));
-	// print_stack(s, NO_OPE, 0);
+	print_stack(s, NO_OPE, 0);
+	// ft_dprintf(STD_OUT, "%s", vct_getstr(s->result));
 	clean_struct(&s);
-	ft_memdel((void**)&stat);
 }
 
 int			main(int ac, char **av)

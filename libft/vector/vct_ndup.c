@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_chr_str.c                                      :+:      :+:    :+:   */
+/*   vct_ndup.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 13:23:12 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 14:53:32 by amartino         ###   ########.fr       */
+/*   Created: 2019/09/05 10:56:01 by amartino          #+#    #+#             */
+/*   Updated: 2020/02/03 14:42:36 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-ssize_t		vct_chr_str(t_vector *vector, char *find)
-{
-	size_t		index;
-	size_t		j;
+/*
+**	Return a duplicate of the given vector from index n
+*/
 
-	index = 0;
-	while (index <= vector->len)
+t_vector	*vct_ndup(t_vector *vector, size_t index)
+{
+	t_vector	*dup;
+
+	dup = NULL;
+	if (vector != NULL && vector->str != NULL)
 	{
-		j = 0;
-		if (vector->str[index] == find[j])
-		{
-			while (find[j] != '\0')
-			{
-				if (vector->str[index] != find[j])
-					break ;
-				index++;
-				j++;
-			}
-			if (find[j] == '\0')
-				return (index - j);
-		}
+		if (index > vector->len)
+			dup = vct_new(0);
 		else
-			index++;
+		{
+			dup = vct_new(vector->size - index);
+			if (dup != NULL)
+			{
+				if (vct_pushstr(dup, (vector->str + index)) == FAILURE)
+					vct_del(&dup);
+			}
+			
+		}
 	}
-	return (FAILURE);
+	return (dup);
 }

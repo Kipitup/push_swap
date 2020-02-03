@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 10:43:18 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:57:22 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int8_t			solve_when_too_small(t_stack *s);
 void			pa_highest(t_stack *s, size_t limit);
 int8_t			pb_under_pivot(t_stack *s, size_t nth, size_t limit);
 int8_t			pa_above_pivot(t_stack *s, size_t nth, size_t limit);
+void			optimize_result(t_vector *vector);
 void			sort_sublist_on_b(t_stack *s, size_t size);
 int8_t			push_next_sublist_on_a(t_stack *s, size_t size);
 void			perfect_sort_for_3_on_top_of_a(t_stack *s);

@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/02/03 11:16:37 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/03 21:27:54 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -141,7 +141,8 @@ $(LIB_PATH): FORCE
 
 unit_test:
 	@echo "\n"
-	$(ARG) ; ./$(NAME_PUSH_SWP) $$ARG | ./$(NAME_CHECKER) $$ARG
+	$(ARG) ; ./$(NAME_PUSH_SWP) $$ARG
+	@# $(ARG) ; ./$(NAME_PUSH_SWP) $$ARG | ./$(NAME_CHECKER) $$ARG
 
 run: all
 	$(MAKE) unit_test
@@ -155,7 +156,7 @@ clean:
 	$(MAKE) clean -C $(LIB_DIR)
 
 fclean: clean
-	rm -rf $(NAME_PUSH_SWP) $(NAME_CHECKER)
+	rm -rf $(NAME_PUSH_SWP).o $(NAME_CHECKER).o $(MAIN_PUSH).o $(MAIN_CHECK).o
 	echo "$(YELLOW)$(NAME_PUSH_SWP)$(END) and $(YELLOW)$(NAME_CHECKER)$(END) \t were \t $(GREEN)clean$(END)\n"
 	$(MAKE) fclean -C $(LIB_DIR)
 

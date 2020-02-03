@@ -6,11 +6,16 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:28:51 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 12:44:25 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/03 22:01:20 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+size_t		sub_size_for_exponent(size_t exponent)
+{
+	return (SUBLIST_MIN_SIZE * ft_pow_positive(2, exponent));
+}
 
 ssize_t		split_stack_in_2_big_part(t_stack *s)
 {
@@ -19,7 +24,7 @@ ssize_t		split_stack_in_2_big_part(t_stack *s)
 
 	if (s->size_b == 0)
 	{
-		sublist_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, (s->exponent_max - 1));
+		sublist_size = sub_size_for_exponent(s->exponent_max - 1);
 		nth = s->size_a - sublist_size;
 		if (pb_under_pivot(s, nth, s->size_a) == FAILURE)
 			return (FAILURE);
@@ -28,9 +33,9 @@ ssize_t		split_stack_in_2_big_part(t_stack *s)
 	else
 	{
 		s->exponent_max = 0;
-		while ((SUBLIST_MIN_SIZE * ft_pow_positive(2, s->exponent_max + 1)) <= s->size_b)
+		while (sub_size_for_exponent(s->exponent_max + 1) <= s->size_b)
 			s->exponent_max++;
-		sublist_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, (s->exponent_max - 1));
+		sublist_size = sub_size_for_exponent(s->exponent_max - 1);
 		nth = s->size_b - sublist_size;
 		if (pa_above_pivot(s, nth, s->size_b) == FAILURE)
 			return (FAILURE);
@@ -60,7 +65,7 @@ int8_t		let_the_magic_of_recursion_happen(t_stack *s, size_t exponent, size_t ex
 	int8_t		ret;
 
 	ret = SUCCESS;
-	sublist_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, exponent);
+	sublist_size = sub_size_for_exponent(exponent);
 	if (exponent == 0 && ret == SUCCESS)
 		sort_sublist_on_b(s, SUBLIST_MIN_SIZE);
 	else
