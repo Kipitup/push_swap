@@ -6,20 +6,11 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:14:47 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 18:59:54 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/03 10:32:06 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-ssize_t		get_nb_of_move(t_vector *vector)
-{
-	ssize_t		nb_of_move;
-
-	nb_of_move = vct_chr_count(vector, '\n');
-
-	return (nb_of_move);
-}
 
 ssize_t		collision_in_filename(t_vector *name, int8_t suffixe)
 {
@@ -45,7 +36,7 @@ void		save_final_result_in_file(t_stack *s)
 	name = vct_newstr("result/");
 	vct_addnb(name, (s->size_a + s->size_b));
 	vct_addstr(name, "_nb_in_");
-	vct_addnb(name, (int64_t)get_nb_of_move(s->result));
+	vct_addnb(name, vct_chr_count(s->result,'\n'));
 	vct_addstr(name, "_moves");
 	fd = open(vct_getstr(name), O_RDWR | O_CREAT | O_EXCL, 0744);
 	if (fd == FAILURE)

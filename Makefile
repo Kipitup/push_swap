@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/01/31 17:06:06 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/03 11:16:37 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -94,7 +94,7 @@ T ?= sample
 VAL ?= no
 REQUEST = 'read -p "Enter a commit message:" pwd; echo $$pwd'
 COMMIT_MESSAGE ?= $(shell bash -c $(REQUEST))
-ARG=`ruby -e "puts (0..$(nb) - 1).to_a.shuffle.join(' ')"`
+ARG= ARG=`ruby -e "puts (0..$(nb) - 1).to_a.shuffle.join(' ')"`
 
                      ####################################
                      #                   				#
@@ -113,13 +113,13 @@ OBJS = $(patsubst %, $(BUILD_DIR)%.o, $(SRCS))
                      #                   				#
                      ####################################
 all: $(NAME_CHECKER) $(NAME_PUSH_SWP)
-	@echo "\n$(CYAN)MAKE COMPLETE$(END)"
+	echo "\n$(CYAN)MAKE COMPLETE$(END)"
 
 $(NAME_PUSH_SWP): $(BUILD_DIR) $(MAIN_OBJ_PS) $(OBJS) $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_PS) $(OBJS) $(LIB_PATH) $(INCLUDES)
+	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_PS) $(OBJS) $(LIB_PATH) $(INCLUDES)
 
 $(NAME_CHECKER): $(BUILD_DIR) $(MAIN_OBJ_C) $(OBJS) $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_C) $(OBJS) $(LIB_PATH) $(INCLUDES)
+	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_C) $(OBJS) $(LIB_PATH) $(INCLUDES)
 
 $(BUILD_DIR):
 	mkdir $@
@@ -140,10 +140,12 @@ $(LIB_PATH): FORCE
 	make -C $(LIB_DIR)
 
 unit_test:
-	./$(NAME_PUSH_SWP) $(ARG)
+	@echo "\n"
+	$(ARG) ; ./$(NAME_PUSH_SWP) $$ARG | ./$(NAME_CHECKER) $$ARG
 
 run: all
 	$(MAKE) unit_test
+	echo "\n$(MAGENTA)result:$(END)"
 	ls -t result
 
 clean:
@@ -160,8 +162,9 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean all re t FORCE git
-.SILENT: $(NAME) $(OBJS) $(BUILD_DIR) $(MAIN_OBJ_PS) $(MAIN_OBJ_C)
-		$(LIB_PATH) clean fclean re t FORCE run unit_test
+.SILENT: $(NAME) $(OBJS) $(BUILD_DIR) $(MAIN_OBJ_PS) $(MAIN_OBJ_C) all re t \
+		$(LIB_PATH) $(NAME_PUSH_SWP) $(NAME_CHECKER) clean fclean run \
+		all
 FORCE:
 
 

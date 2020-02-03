@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/31 15:28:11 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/03 10:43:18 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void 			perfect_sort_for_size_a_3(t_stack *s);
 */
 typedef	void	(*operfunc)(t_stack *s);
 void			read_checker(t_stack *s);
-void			operation_checker(operfunc *f, char *ln, t_stack *s, size_t *count);
+int8_t			operation_checker(operfunc *f, char *ln, t_stack *s, size_t *count);
 
 /*
 ** ############################################################################
