@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:23:57 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 21:51:15 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/04 13:43:41 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,30 @@ void	pause_and_show(t_stack *s)
 void	print_command(size_t count, int8_t ope, uint8_t	color, size_t size_a, size_t size_b)
 {
 	ft_printf("\tCount = %u\n\tSize = %zu\tSize_a = %zu \tSize_b = %zu\n\n\t", count, (size_a + size_b), size_a, size_b);
-	if (color == TRUE && (ope >= 0 && ope <= 2))
-		ft_printf("{c_b_green}Swap\t\tA: sa\tB: sb\tBoth: ss{c_end}\n", count);
-	else
-		ft_printf("Swap\t\tA: sa\tB: sb\tBoth: ss\n", count);
-	if (color == TRUE && (ope == 3 || ope == 4))
-		ft_printf("\t{c_b_green}Push\t\tA: pa\tB: pb{c_end}\n");
-	else
-		ft_printf("\tPush\t\tA: pa\tB: pb\n");
-	if (color == TRUE && (ope >= 5 && ope <= 7))
-		ft_printf("\t{c_b_green}Rotate up\tA: ra\tB: rb\tBoth: rr{c_end}\n");
-	else
-		ft_printf("\tRotate up\tA: ra\tB: rb\tBoth: rr\n");
-	if (color == TRUE && (ope >= 8 && ope <= 10))
-		ft_printf("\t{c_b_green}Rotate down\tA: rra\tB: rrb\tBoth: rrr{c_end}\n");
-	else
-		ft_printf("\tRotate down\tA: rra\tB: rrb\tBoth: rrr\n");
-	if (color == TRUE)
-	{
-		ft_printf("\n\tCOLOR:\n\t{c_b_green}Last action{c_end}\n");
-		ft_printf("\t{c_yellow}Minimum{c_end}\n\t{c_blue}Median{c_end}\n\t{c_red}Maximum{c_end}\n");
-		ft_printf("{c_end}\n");
-	}
+	// if (color == TRUE && (ope >= 0 && ope <= 2))
+	// 	ft_printf("{c_b_green}Swap\t\tA: sa\tB: sb\tBoth: ss{c_end}\n", count);
+	// else
+	// 	ft_printf("Swap\t\tA: sa\tB: sb\tBoth: ss\n", count);
+	// if (color == TRUE && (ope == 3 || ope == 4))
+	// 	ft_printf("\t{c_b_green}Push\t\tA: pa\tB: pb{c_end}\n");
+	// else
+	// 	ft_printf("\tPush\t\tA: pa\tB: pb\n");
+	// if (color == TRUE && (ope >= 5 && ope <= 7))
+	// 	ft_printf("\t{c_b_green}Rotate up\tA: ra\tB: rb\tBoth: rr{c_end}\n");
+	// else
+	// 	ft_printf("\tRotate up\tA: ra\tB: rb\tBoth: rr\n");
+	// if (color == TRUE && (ope >= 8 && ope <= 10))
+	// 	ft_printf("\t{c_b_green}Rotate down\tA: rra\tB: rrb\tBoth: rrr{c_end}\n");
+	// else
+	// 	ft_printf("\tRotate down\tA: rra\tB: rrb\tBoth: rrr\n");
+	// if (color == TRUE)
+	// {
+	// 	ft_printf("\n\tCOLOR:\n\t{c_b_green}Last action{c_end}\n");
+	// 	ft_printf("\t{c_yellow}Minimum{c_end}\n\t{c_blue}Median{c_end}\n\t{c_red}Maximum{c_end}\n");
+	// 	ft_printf("{c_end}\n");
+	// }
+	(void)ope;
+	(void)color;
 }
 
 void	print_no_color(t_stack *s)

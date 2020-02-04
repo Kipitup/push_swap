@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/02/03 21:27:54 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/04 18:55:38 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -141,8 +141,8 @@ $(LIB_PATH): FORCE
 
 unit_test:
 	@echo "\n"
-	$(ARG) ; ./$(NAME_PUSH_SWP) $$ARG
-	@# $(ARG) ; ./$(NAME_PUSH_SWP) $$ARG | ./$(NAME_CHECKER) $$ARG
+	@# $(ARG) ; ./$(NAME_PUSH_SWP) $$ARG
+	$(ARG) ; ./$(NAME_PUSH_SWP) $$ARG | ./$(NAME_CHECKER) $$ARG
 
 run: all
 	$(MAKE) unit_test

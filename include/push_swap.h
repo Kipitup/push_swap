@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 17:57:22 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:26:34 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "define_ps.h"
+
+// #define ft_memalloc(X) test_malloc( X, __FILE__, __LINE__, __func__)
+// void		*test_malloc(size_t size, const char *file, int line, const char *function);
 
 typedef struct	s_stack
 {
@@ -81,10 +84,10 @@ int8_t			pb_under_pivot(t_stack *s, size_t nth, size_t limit);
 int8_t			pa_above_pivot(t_stack *s, size_t nth, size_t limit);
 void			optimize_result(t_vector *vector);
 void			sort_sublist_on_b(t_stack *s, size_t size);
-int8_t			push_next_sublist_on_a(t_stack *s, size_t size);
 void			perfect_sort_for_3_on_top_of_a(t_stack *s);
 void			perfect_sort_for_3_at_the_bottom_of_a(t_stack *s);
 void 			perfect_sort_for_size_a_3(t_stack *s);
+size_t			sub_size_for_exponent(size_t exponent);
 
 /*
 ** ############################################################################

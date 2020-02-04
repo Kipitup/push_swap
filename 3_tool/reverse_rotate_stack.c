@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 20:01:39 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/31 17:02:46 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:51:48 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		reverse_rotate_stack_b(t_stack *s)
 	first_elem = s->b[0];
 	if (i < s->size_b)
 		shiftdown_stack_b(s);
-	s->b[s->size_b - 1] = first_elem;
+	s->b[s->size_b - 1] = first_elem; //WARNING
 	s->color_nb = s->b[s->size_b - 1];
 }
 

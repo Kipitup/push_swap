@@ -6,7 +6,7 @@
 #    By: fkante <fkante@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/19 17:11:38 by fkante            #+#    #+#              #
-#    Updated: 2020/02/03 14:27:55 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/04 18:52:18 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ INCLUDES = -I./includes
 HEAD += ./includes/libft.h
 HEAD += ./includes/vector.h
 
+SRCS += ft_memalloc.c
+# SRCS += ft_malloc_debug.c
 SRCS += ft_atoi.c
 SRCS += ft_bzero.c
 SRCS += ft_isalnum.c
@@ -39,7 +41,6 @@ SRCS += ft_lstiter.c
 SRCS += ft_lstnew.c
 SRCS += ft_lstmap.c
 SRCS += ft_lstfindone.c
-SRCS += ft_memalloc.c
 SRCS += ft_memccpy.c
 SRCS += ft_memchr.c
 SRCS += ft_memcmp.c
