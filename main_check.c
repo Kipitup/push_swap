@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:57:10 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/04 18:55:19 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/05 19:00:43 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			main(int ac, char **av)
 	int32_t		*sorted_stack;
 
 	s = NULL;
-	if (ac >= 2)
+	if (ac == 45)
 	{
 		++av;
 		--ac;
@@ -54,10 +54,21 @@ int			main(int ac, char **av)
 			if (s->verbose == TRUE)
 				print_stack(s, NO_OPE, 0);
 			is_it_sorted(s, sorted_stack); //to clean
+			ft_memdel((void**)&sorted_stack);
 		}
 		clean_struct(&s);
 	}
 	else
-		ft_print_err_false("Not enough arguments", STD_ERR);
+	{
+		t_vector	*vector;
+		ssize_t		fd;
+
+		vector = NULL;
+		fd = open(av[1], O_RDWR, 0744);
+		vct_read_line(fd, &vector);
+		vct_print(vector);
+		vct_del(&vector);
+	}
+		// ft_print_err_false("Not enough arguments", STD_ERR);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 15:25:09 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 15:11:23 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:54:06 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define NB_OF_APPLY_FUNC		3
 # define NB_OF_TEST_FUNC		4
 # define NB_TOTAL_OF_FUNC		NB_OF_APPLY_FUNC + NB_OF_TEST_FUNC
+# define START					0
 
 /*
 *****************************************************************************
@@ -78,6 +79,7 @@ void			vct_del(t_vector **vector);
 char			*vct_getstr(t_vector *vector);
 char			vct_getchar_at(t_vector *vector, size_t index);
 void			vct_print(t_vector *vector);
+int8_t			vct_read_line(const int fd, t_vector **line);
 
 /*
 **********************
@@ -98,19 +100,21 @@ int8_t			vct_addnb(t_vector *vector, int64_t nb);
 **********************
 */
 void			vct_pop(t_vector *vector, size_t len);
-void			vct_pop_from(t_vector *vector, size_t len, size_t index);
+int8_t			vct_pop_from(t_vector *vector, size_t len, size_t index);
 
 /*
 **********************
 **  	 JOIN	    **
 **********************
 */
+t_vector 		*vct_sub(t_vector *vector, size_t start, size_t len);
 t_vector		*vct_dup(t_vector *vector);
 t_vector		*vct_ndup(t_vector *vector, size_t index);
 int8_t			vct_cat(t_vector *dest, t_vector *src);
 t_vector		*vct_join(t_vector *dest, t_vector *src);
 t_vector		*vct_joinfree(t_vector **dest, t_vector **src,
 							int first_or_second_or_both);
+
 /*
 **********************
 **  	 FILL	    **

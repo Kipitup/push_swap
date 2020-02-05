@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_print.c                                        :+:      :+:    :+:   */
+/*   vct_sub.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 15:00:45 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/05 17:15:22 by amartino         ###   ########.fr       */
+/*   Created: 2020/02/05 15:57:53 by amartino          #+#    #+#             */
+/*   Updated: 2020/02/05 16:55:04 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-/*
-**	Print the vector and a new line
-*/
-
-void	vct_print(t_vector *vector)
+t_vector 	*vct_sub(t_vector *vector, size_t start, size_t len)
 {
-	if (vector != NULL && vector->str != NULL)
+	t_vector	*new_vector;
+
+	if (vector == NULL || vector->str == NULL || start > vector->len)
+		return (NULL);
+	len = len > (vector->len - start) ? (vector->len - start) : len;
+	new_vector = vct_new(len);
+	if (new_vector != NULL)
 	{
-		write(1, vector->str, vector->len);
-		write(1, "\n", 1);	
+		ft_strncpy(new_vector->str, (vector->str + start), len);
+		new_vector->len = len;
 	}
+	return (new_vector);
 }
