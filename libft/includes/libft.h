@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 12:58:24 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/05 12:11:57 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:41:37 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SUCCESS				0
 # define BUFF_SIZE				1024
 # define FD_LIMIT				4864
+# define CLEANUP				-42
 
 # include <sys/types.h>
 # include <sys/stat.h>

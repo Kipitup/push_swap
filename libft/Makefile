@@ -6,7 +6,7 @@
 #    By: fkante <fkante@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/19 17:11:38 by fkante            #+#    #+#              #
-#    Updated: 2020/02/05 16:52:53 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/06 14:20:39 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,6 +131,7 @@ SRCS += vct_del.c
 SRCS += vct_new.c
 SRCS += vct_newstr.c
 SRCS += vct_addstr.c
+SRCS += vct_addnstr.c
 SRCS += vct_pop.c
 SRCS += vct_dup.c
 SRCS += vct_ndup.c
@@ -161,6 +162,7 @@ SRCS += vct_chr_count.c
 SRCS += vct_chr_str_count.c
 SRCS += vct_sub.c
 SRCS += vct_read_line.c
+SRCS +=	vct_read_line_for_push_swap.c
 
 #----------------------------------- BTREE ------------------------------------#
 SRCS += heap_build.c

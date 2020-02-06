@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/05 11:34:30 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:17:43 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ size_t			sub_size_for_exponent(size_t exponent);
 */
 typedef	void	(*operfunc)(t_stack *s);
 void			read_checker(t_stack *s);
-int8_t			operation_checker(operfunc *f, char *ln, t_stack *s, size_t *count);
+int8_t			operation_checker(operfunc *f_ptr, t_vector *line, t_stack *s,
+									size_t *count);
 
 /*
 ** ############################################################################

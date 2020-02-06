@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_read_line.c                                    :+:      :+:    :+:   */
+/*   vct_read_line_for_push_swap.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 15:08:41 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/06 14:13:44 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:35:22 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,18 @@ int8_t	read_file(t_vector *vector, t_vector **line, const int fd)
 	ssize_t		ret;
 	char		buff[BUFF_SIZE + 1];
 
-	while ((ret = read(fd, &buff, BUFF_SIZE)) > 0)
-	{
-		buff[ret] = '\0';
-		if (vct_addnstr(vector, buff, ret) == FAILURE)
-			return (FAILURE);
-		if (vct_chr(vector, '\n') >= 0)
-			return (parse_line(vector, line, FALSE));
-	}
-	if (ret == SUCCESS && vector->len > 0)
-		return (parse_line(vector, line, TRUE));
+	ret = read(fd, &buff, BUFF_SIZE);
+	buff[ret] = '\0';
+	if (vct_addnstr(vector, buff, ret) == FAILURE)
+		return (FAILURE);
+	if (vct_chr(vector, '\n') >= 0)
+		return (parse_line(vector, line, FALSE));
+	else if (vector->len > 0)
+		ret = FAILURE;
 	return (ret);
 }
 
-int8_t		vct_read_line(const int fd, t_vector **line)
+int8_t		vct_read_line_for_push_swap(const int fd, t_vector **line)
 {
 	static t_vector	*vector = NULL;
 	ssize_t			ret;

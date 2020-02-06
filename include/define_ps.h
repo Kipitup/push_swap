@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/04 14:26:10 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:35:50 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 
 # define MALLOC_PIVOT		"memory allocation failed when finding pivot index"
 # define WRONG_INPUT		"Wrong input format. Please put only numbers in numeric format"
+# define INPUT_TOO_LONG		"Input shoudn't be so long OR missing a \\n at the end" 
 # define INT_MAX_MIN		"You can only give me int. Please do not exceed"
 # define NB_DUPLICATE		"Duplicates numbers are strictly forbidden. Please respect my rules"
 # define MALLOC_ERR			"memory allocation failed"

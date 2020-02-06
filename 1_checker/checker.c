@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 10:39:19 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/05 11:36:12 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:31:27 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,33 @@ void	read_checker(t_stack *s)
 							push_stack_a, push_stack_b, rotate_stack_a,
 							rotate_stack_b, rotate_both, reverse_rotate_stack_a,
 							reverse_rotate_stack_b, reverse_both};
-	char		*line;
+	t_vector 	*line;
 	size_t		count;
 	int8_t		ret;
 
 	count = 0;
 	line = NULL;
-	while (get_next_line(0, &line) > 0)
+	while ((ret = vct_read_line_for_push_swap(STD_IN, &line)) > 0)
 	{
 		ret = operation_checker(func_ptr, line, s, &count);
-		ft_strdel(&line);
+		vct_del(&line);
 		if (ret == FAILURE)
 			return ;
 	}
+	if (ret == FAILURE)
+		return (ft_print_err_void(INPUT_TOO_LONG, STD_ERR));
 }
 
-int8_t	operation_checker(operfunc *f_ptr, char *line, t_stack *s, size_t *count)
+int8_t	operation_checker(operfunc *f_ptr, t_vector *line, t_stack *s,
+							size_t *count)
 {
-	char		*oper[NB_OPE] = {SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR};
+	char		*ope[NB_OPE] = {SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR};
 	uint8_t 	i;
 
 	i = 0;
 	while (i < NB_OPE)
 	{
-		if (ft_strequ(line, oper[i]) == TRUE)
+		if (ft_strequ(vct_getstr(line), ope[i]) == TRUE)
 		{
 			f_ptr[i](s);
 			(*count)++;
