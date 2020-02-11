@@ -29,7 +29,7 @@ ssize_t		ft_get_n_highest(int32_t *tab, size_t nth, size_t start,
 	}
 	while (i < (limit + start))
 	{
-		if (tab[i] == heap->A[ROOT])
+		if (tab[i] == heap->a[ROOT])
 			break ;
 		i++;
 	}

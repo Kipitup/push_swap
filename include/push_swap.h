@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/10 18:10:49 by amartinod        ###   ########.fr       */
+/*   Updated: 2020/02/11 17:34:42 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "define_ps.h"
-
-// #define ft_memalloc(X) test_malloc( X, __FILE__, __LINE__, __func__)
-// void		*test_malloc(size_t size, const char *file, int line, const char *function);
 
 typedef struct	s_stack
 {
@@ -33,7 +30,7 @@ typedef struct	s_stack
 	uint8_t		color;
 }				t_stack;
 
-typedef struct 	s_stat
+typedef struct	s_stat
 {
 	int32_t		min_a;
 	int32_t		max_a;
@@ -86,7 +83,7 @@ void			optimize_result(t_vector *vector);
 void			selection_sort_sublist_on_b(t_stack *s, size_t size);
 void			perfect_sort_for_3_on_top_of_a(t_stack *s);
 void			perfect_sort_for_3_at_the_bottom_of_a(t_stack *s);
-void 			perfect_sort_for_size_a_3(t_stack *s);
+void			perfect_sort_for_size_a_3(t_stack *s);
 size_t			sub_size_for_exponent(size_t exponent);
 
 /*
@@ -94,9 +91,9 @@ size_t			sub_size_for_exponent(size_t exponent);
 ** ################################ CHECKER ###################################
 ** ############################################################################
 */
-typedef	void	(*operfunc)(t_stack *s);
-void			read_checker(t_stack *s);
-int8_t			operation_checker(operfunc *f_ptr, t_vector *line, t_stack *s,
+typedef	void	(*t_operfunc)(t_stack *s);
+int8_t			read_checker(t_stack *s);
+int8_t			operation_checker(t_operfunc *f_ptr, t_vector *line, t_stack *s,
 									size_t *count);
 
 /*
@@ -105,14 +102,17 @@ int8_t			operation_checker(operfunc *f_ptr, t_vector *line, t_stack *s,
 ** ############################################################################
 */
 void			print_stack(t_stack *s, int8_t ope, size_t count);
-void			print_command(size_t count, int8_t ope, uint8_t	color, size_t size_a, size_t size_b);
-t_stat 			*get_stat(t_stack *s);
+void			print_command(size_t count, int8_t ope, t_stack *s);
+int8_t			check_ope(t_stack *s, size_t size, int8_t ope, int8_t stack);
+void			print_with_color(t_stack *s, int8_t ope);
+t_stat			*get_stat(t_stack *s);
+void			handle_a(t_stack *s, size_t size, int8_t ope, t_stat *stat);
+void			handle_b(t_stack *s, size_t size, int8_t ope, t_stat *stat);
 ssize_t			get_nb_of_move();
 ssize_t			collision_in_filename(t_vector *name, int8_t suffixe);
 void			write_final_result(ssize_t fd);
 void			save_final_result_in_file(t_stack *s, int ac, char **av);
 void			pause_and_show(t_stack *s);
-
 
 /*
 ** ############################################################################
@@ -146,6 +146,7 @@ void			rra(t_stack *s);
 void			rrb(t_stack *s);
 void			rr(t_stack *s);
 void			rrr(t_stack *s);
+int8_t			is_it_sorted(t_stack *s);
 
 /*
 ** ############################################################################
@@ -154,6 +155,5 @@ void			rrr(t_stack *s);
 */
 void			clean_struct(t_stack **s);
 void			clean_tmp(char ***tmp, size_t i);
-
 
 #endif

@@ -6,12 +6,11 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 21:08:05 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/23 21:16:25 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:38:27 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "btree.h"
-#include <stdio.h>
 
 ssize_t		ft_get_n_smallest(int32_t *tab, size_t nth, size_t start,
 								size_t limit)
@@ -30,7 +29,7 @@ ssize_t		ft_get_n_smallest(int32_t *tab, size_t nth, size_t start,
 	}
 	while (i < (limit + start))
 	{
-		if (tab[i] == heap->A[ROOT])
+		if (tab[i] == heap->a[ROOT])
 			break ;
 		i++;
 	}

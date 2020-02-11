@@ -6,12 +6,11 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 10:23:18 by amartino          #+#    #+#             */
-/*   Updated: 2019/11/28 15:19:30 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:38:36 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-#include <stdio.h>
 
 /*
 **	Return a new vector initialized with a string;

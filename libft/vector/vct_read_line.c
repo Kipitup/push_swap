@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 15:08:41 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/06 14:13:44 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:13:06 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 **	Read the next line from the given fd.
 */
 
-int8_t	parse_line(t_vector *vector, t_vector **line, uint8_t the_end)
+int8_t		parse_line(t_vector *vector, t_vector **line, uint8_t the_end)
 {
 	ssize_t	index;
 	int8_t	ret;
 
 	ret = FALSE;
- 	index = vct_chr(vector, '\n');
+	index = vct_chr(vector, '\n');
 	if (index >= 0)
 	{
 		ret = TRUE;
@@ -43,7 +43,7 @@ int8_t	parse_line(t_vector *vector, t_vector **line, uint8_t the_end)
 	return (ret);
 }
 
-int8_t	read_file(t_vector *vector, t_vector **line, const int fd)
+int8_t		read_file(t_vector *vector, t_vector **line, const int fd)
 {
 	ssize_t		ret;
 	char		buff[BUFF_SIZE + 1];

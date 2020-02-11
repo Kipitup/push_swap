@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/20 12:58:24 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/11 09:31:34 by amartinod        ###   ########.fr       */
+/*   Updated: 2020/02/11 12:28:05 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 # include <limits.h>
 # include <string.h>
 
-// #define ft_memalloc(X) ft_malloc_debug(X, __FILE__, __LINE__, __func__)
-
 /*
-** # for linux set-up #
+** #define ft_memalloc(X) ft_malloc_debug(X, __FILE__, __LINE__, __func__)
 */
 
 # define FALSE					0
@@ -36,10 +34,12 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-#include <time.h>
+# include <time.h>
 
-
-// void		*ft_malloc_debug(size_t size, const char *file, int line, const char *function);
+/*
+** void		*ft_malloc_debug(size_t size, const char *file, int line,
+** const char *function);
+*/
 
 /*
 ** ############################################################################

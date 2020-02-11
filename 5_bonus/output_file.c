@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:14:47 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/10 19:22:12 by amartinod        ###   ########.fr       */
+/*   Updated: 2020/02/11 12:09:32 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,8 @@ void		write_in_file(t_stack *s, ssize_t fd, int ac, char **av)
 		clean_tmp(&tmp, i);
 	}
 	else
-	{
 		while (i < (s->size_a + s->size_b))
-		{
-			ft_dprintf(fd, "%s ", av[i]);
-			i++;
-		}
-	}
+			ft_dprintf(fd, "%s ", av[i++]);
 	ft_dprintf(fd, "\n\n%s", vct_getstr(s->result));
 }
 
@@ -65,7 +60,7 @@ void		save_final_result_in_file(t_stack *s, int ac, char **av)
 	name = vct_newstr("result/");
 	vct_addnb(name, (s->size_a + s->size_b));
 	vct_addstr(name, "_nb_in_");
-	vct_addnb(name, vct_chr_count(s->result,'\n'));
+	vct_addnb(name, vct_chr_count(s->result, '\n'));
 	vct_addstr(name, "_moves");
 	fd = open(vct_getstr(name), O_RDWR | O_CREAT | O_EXCL, 0744);
 	if (fd == FAILURE)

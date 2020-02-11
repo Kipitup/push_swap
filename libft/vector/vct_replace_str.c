@@ -6,12 +6,12 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 11:58:09 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 20:40:34 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:11:38 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-#include <stdio.h>
+
 /*
 **	Search the vector to find if a given 'str' string exist in the vector.
 **	If it does, replace it with the given 'replace' string.

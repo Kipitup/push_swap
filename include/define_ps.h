@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/10 11:57:22 by amartinod        ###   ########.fr       */
+/*   Updated: 2020/02/11 16:39:51 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@
 # define RRR				"rrr"
 
 # define MALLOC_PIVOT		"memory allocation failed when finding pivot index"
-# define WRONG_INPUT		"Wrong input format. Please put only numbers in numeric format"
-# define INPUT_TOO_LONG		"Input shoudn't be so long OR missing a \\n at the end"
+# define WRONG_INPUT		"Wrong input format. Only numbers in numeric format"
+# define WRONG_OPE			"This is not a correct operation."
+# define INPUT_TOO_LONG		"Input too long OR missing a \\n at the end"
 # define INT_MAX_MIN		"You can only give me int. Please do not exceed"
-# define NB_DUPLICATE		"Duplicates numbers are strictly forbidden. Please respect my rules"
+# define NB_DUPLICATE		"Duplicates numbers are strictly forbidden. Respect"
 # define MALLOC_ERR			"memory allocation failed"
 # define MALLOC_SPLIT_AV	"memory allocation failed when ft_strsplit av"
 # define MALLOC_STRUCT		"memory allocation failed with the structure s"

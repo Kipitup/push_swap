@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:28:51 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/10 12:00:47 by amartinod        ###   ########.fr       */
+/*   Updated: 2020/02/11 11:59:03 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,17 @@ int8_t		divide_and_conquer(t_stack *s, size_t exponent, size_t exponent_max)
 
 int8_t		solve(t_stack *s)
 {
-	ssize_t		sublist_size;
+	ssize_t		sublis_size;
 	int8_t		ret;
 
 	ret = SUCCESS;
 	if (s->exponent_max > 0)
 	{
-		sublist_size = split_stack_in_2_big_part(s);
-		ret = sublist_size == FAILURE ? FAILURE : SUCCESS;
-		sublist_size = sublist_size > 0 ? s->size_a - sublist_size : sublist_size;
+		sublis_size = split_stack_in_2_big_part(s);
+		ret = sublis_size == FAILURE ? FAILURE : SUCCESS;
+		sublis_size = sublis_size > 0 ? s->size_a - sublis_size : sublis_size;
 		if (ret == SUCCESS)
-			ret = organize_a_in_unsorted_sublist(s, (size_t)sublist_size);
+			ret = organize_a_in_unsorted_sublist(s, (size_t)sublis_size);
 		if (ret == SUCCESS)
 			ret = pb_under_pivot(s, (SUBLIST_MIN_SIZE / 2), SUBLIST_MIN_SIZE);
 		selection_sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));

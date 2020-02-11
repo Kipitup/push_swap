@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/02/04 18:55:38 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/11 17:35:02 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -59,6 +59,7 @@ SRCS += push_swp
 SRCS += operation_on_stack
 SRCS += sublist_tools
 SRCS += perfect_sort
+SRCS += perfect_sort_bis
 
 # checker
 SRCS += checker
@@ -75,6 +76,7 @@ SRCS += shift_stack
 SRCS += rotate_both
 SRCS += rotate_stack
 SRCS += reverse_rotate_stack
+SRCS += is_it_sorted
 
 # clean
 SRCS += clean
@@ -83,6 +85,7 @@ SRCS += clean
 SRCS += print
 SRCS += color
 SRCS += output_file
+SRCS += bonus_tools
 
                      ####################################
                      #                   				#
@@ -156,7 +159,7 @@ clean:
 	$(MAKE) clean -C $(LIB_DIR)
 
 fclean: clean
-	rm -rf $(NAME_PUSH_SWP).o $(NAME_CHECKER).o $(MAIN_PUSH).o $(MAIN_CHECK).o
+	rm -rf $(NAME_PUSH_SWP) $(NAME_CHECKER) $(MAIN_PUSH).o $(MAIN_CHECK).o
 	echo "$(YELLOW)$(NAME_PUSH_SWP)$(END) and $(YELLOW)$(NAME_CHECKER)$(END) \t were \t $(GREEN)clean$(END)\n"
 	$(MAKE) fclean -C $(LIB_DIR)
 

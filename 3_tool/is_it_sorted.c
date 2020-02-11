@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_ndup.c                                         :+:      :+:    :+:   */
+/*   is_it_sorted.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 10:56:01 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/11 12:10:42 by amartino         ###   ########.fr       */
+/*   Created: 2020/02/11 17:30:18 by amartino          #+#    #+#             */
+/*   Updated: 2020/02/11 17:35:13 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "push_swap.h"
 
-/*
-**	Return a duplicate of the given vector from index n
-*/
-
-t_vector	*vct_ndup(t_vector *vector, size_t index)
+int8_t		is_it_sorted(t_stack *s)
 {
-	t_vector	*dup;
+	int32_t 	*sorted_stack;
+	size_t		i;
+	size_t		j;
 
-	dup = NULL;
-	if (vector != NULL && vector->str != NULL)
+	j = 0;
+	i = s->size_a - 1;
+	sorted_stack = ft_sort(s->a, s->size_a);
+	if (sorted_stack != NULL)
 	{
-		if (index > vector->len)
-			dup = vct_new(0);
-		else
+		while (i > 0 && j < s->size_a)
 		{
-			dup = vct_new(vector->size - index);
-			if (dup != NULL)
+			if (s->a[i] != sorted_stack[j])
 			{
-				if (vct_pushstr(dup, (vector->str + index)) == FAILURE)
-					vct_del(&dup);
+				ft_memdel((void**)&sorted_stack);
+				return (FALSE);
 			}
+			i--;
+			j++;
 		}
+		ft_memdel((void**)&sorted_stack);
+		return (TRUE);
 	}
-	return (dup);
+	return (FAILURE);
 }

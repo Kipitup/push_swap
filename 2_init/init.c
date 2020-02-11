@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:43 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/10 19:44:34 by amartinod        ###   ########.fr       */
+/*   Updated: 2020/02/11 12:06:00 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		fill_in_static_variable(t_stack *s, char **tab, size_t size)
 {
 	s->size_a = size;
-	s->verbose = check_for_bonus(tab, "-v");;
+	s->verbose = check_for_bonus(tab, "-v");
 	s->color = check_for_bonus(tab, "-c");
 	s->exponent_max = 0;
 	while ((SUBLIST_MIN_SIZE * ft_pow_positive(2, s->exponent_max + 1)) <= size)

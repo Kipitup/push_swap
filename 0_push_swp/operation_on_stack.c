@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 18:34:04 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/04 15:21:03 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 11:47:45 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	pa_highest(t_stack *s, size_t limit)
 int8_t	pb_under_pivot(t_stack *s, size_t nth, size_t limit)
 {
 	size_t		last;
-	ssize_t 	index;
+	ssize_t		index;
 	int32_t		pivot;
 	uint8_t		is_end;
 
@@ -60,7 +60,6 @@ int8_t	pb_under_pivot(t_stack *s, size_t nth, size_t limit)
 			rra(s);
 			if (s->a[last] <= pivot)
 				pb(s);
-
 		}
 		limit--;
 	}
@@ -70,7 +69,7 @@ int8_t	pb_under_pivot(t_stack *s, size_t nth, size_t limit)
 int8_t	pa_above_pivot(t_stack *s, size_t nth, size_t limit)
 {
 	size_t		last;
-	ssize_t 	index;
+	ssize_t		index;
 	int32_t		pivot;
 	uint8_t		is_end;
 
@@ -89,28 +88,24 @@ int8_t	pa_above_pivot(t_stack *s, size_t nth, size_t limit)
 			rrb(s);
 			if (s->b[last] >= pivot)
 				pa(s);
-
 		}
 		limit--;
 	}
 	return (SUCCESS);
 }
 
-void		optimize_result(t_vector *vector)
+void	optimize_result(t_vector *vector)
 {
-	ssize_t	count;
-
-	count = vct_replace_str(vector, "\nrra\nra\n", "\n");
-	count += vct_replace_str(vector, "\nra\nrra\n", "\n");
-	count += vct_replace_str(vector, "\npa\npb\n", "\n");
-	count += vct_replace_str(vector, "\npb\npa\n", "\n");
-	count += vct_replace_str(vector, "\nrrb\nrb\n", "\n");
-	count += vct_replace_str(vector, "\nrb\nrrb\n", "\n");
-	count += vct_replace_str(vector, "\nrb\nra\n", "\nrr\n");
-	count += vct_replace_str(vector, "\nra\nrb\n", "\nrr\n");  //never use
-	count += vct_replace_str(vector, "\nrra\nrrb\n", "\nrrr\n");  //never use
-	count += vct_replace_str(vector, "\nrra\nrrb\n", "\nrrr\n");  //never use
-	count += vct_replace_str(vector, "\nsa\nsb\n", "\nss\n");  //never use
-	count += vct_replace_str(vector, "\nsb\nsa\n", "\nss\n");  //never use
-	// ft_dprintf(STD_ERR, "count of opti: %zu\n", count);
+	vct_replace_str(vector, "\nrra\nra\n", "\n");
+	vct_replace_str(vector, "\nra\nrra\n", "\n");
+	vct_replace_str(vector, "\npa\npb\n", "\n");
+	vct_replace_str(vector, "\npb\npa\n", "\n");
+	vct_replace_str(vector, "\nrrb\nrb\n", "\n");
+	vct_replace_str(vector, "\nrb\nrrb\n", "\n");
+	vct_replace_str(vector, "\nrb\nra\n", "\nrr\n");
+	vct_replace_str(vector, "\nra\nrb\n", "\nrr\n");
+	vct_replace_str(vector, "\nrra\nrrb\n", "\nrrr\n");
+	vct_replace_str(vector, "\nrra\nrrb\n", "\nrrr\n");
+	vct_replace_str(vector, "\nsa\nsb\n", "\nss\n");
+	vct_replace_str(vector, "\nsb\nsa\n", "\nss\n");
 }
