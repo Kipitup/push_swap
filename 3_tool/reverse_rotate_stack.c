@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 20:01:39 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/11 16:47:21 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 20:41:47 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void		reverse_rotate_stack_b(t_stack *s)
 	}
 }
 
-void	rra(t_stack *s)
+void		rra(t_stack *s)
 {
 	reverse_rotate_stack_a(s);
 	vct_addstr(s->result, "rra\n");
 }
 
-void	rrb(t_stack *s)
+void		rrb(t_stack *s)
 {
 	reverse_rotate_stack_b(s);
 	vct_addstr(s->result, "rrb\n");
