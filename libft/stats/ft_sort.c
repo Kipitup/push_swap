@@ -25,7 +25,7 @@ int32_t				*ft_sort(int32_t *tab, size_t size)
 		return (ft_print_err_null("memory allocation failed", STD_ERR));
 	while (i < size)
 	{
-		sorted_array[i] = heap->A[ROOT];
+		sorted_array[i] = heap->a[ROOT];
 		delete_root(heap);
 		i++;
 	}

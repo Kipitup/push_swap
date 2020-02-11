@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/01/24 18:04:00 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/11 17:35:02 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -57,8 +57,9 @@ MAIN_CHECK = main_check
 # push_swap
 SRCS += push_swp
 SRCS += operation_on_stack
-SRCS += pivot_on_top
 SRCS += sublist_tools
+SRCS += perfect_sort
+SRCS += perfect_sort_bis
 
 # checker
 SRCS += checker
@@ -75,6 +76,7 @@ SRCS += shift_stack
 SRCS += rotate_both
 SRCS += rotate_stack
 SRCS += reverse_rotate_stack
+SRCS += is_it_sorted
 
 # clean
 SRCS += clean
@@ -83,16 +85,19 @@ SRCS += clean
 SRCS += print
 SRCS += color
 SRCS += output_file
+SRCS += bonus_tools
 
                      ####################################
                      #                   				#
                      #       	  VARIABLES    			#
                      #                   				#
                      ####################################
+nb ?= 50
 T ?= sample
 VAL ?= no
 REQUEST = 'read -p "Enter a commit message:" pwd; echo $$pwd'
 COMMIT_MESSAGE ?= $(shell bash -c $(REQUEST))
+ARG= ARG=`ruby -e "puts (0..$(nb) - 1).to_a.shuffle.join(' ')"`
 
                      ####################################
                      #                   				#
@@ -111,13 +116,13 @@ OBJS = $(patsubst %, $(BUILD_DIR)%.o, $(SRCS))
                      #                   				#
                      ####################################
 all: $(NAME_CHECKER) $(NAME_PUSH_SWP)
-	@echo "\n$(CYAN)MAKE COMPLETE$(END)"
+	echo "\n$(CYAN)MAKE COMPLETE$(END)"
 
 $(NAME_PUSH_SWP): $(BUILD_DIR) $(MAIN_OBJ_PS) $(OBJS) $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_PS) $(OBJS) $(LIB_PATH) $(INCLUDES)
+	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_PS) $(OBJS) $(LIB_PATH) $(INCLUDES)
 
 $(NAME_CHECKER): $(BUILD_DIR) $(MAIN_OBJ_C) $(OBJS) $(LIB_PATH)
-	@$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_C) $(OBJS) $(LIB_PATH) $(INCLUDES)
+	$(CC) $(CFLAGS) -o $@ $(MAIN_OBJ_C) $(OBJS) $(LIB_PATH) $(INCLUDES)
 
 $(BUILD_DIR):
 	mkdir $@
@@ -137,8 +142,15 @@ $(OBJS): $(BUILD_DIR)%.o: %.c $(HEAD) Makefile
 $(LIB_PATH): FORCE
 	make -C $(LIB_DIR)
 
-t: all $(VAL)
-	$(VALGRIND) ./ft_printf examples/$(T) #to be changed
+unit_test:
+	@echo "\n"
+	@# $(ARG) ; ./$(NAME_PUSH_SWP) $$ARG
+	$(ARG) ; ./$(NAME_PUSH_SWP) $$ARG | ./$(NAME_CHECKER) $$ARG
+
+run: all
+	$(MAKE) unit_test
+	echo "\n$(MAGENTA)result:$(END)"
+	ls -t result
 
 clean:
 	rm -f $(OBJS)
@@ -147,14 +159,16 @@ clean:
 	$(MAKE) clean -C $(LIB_DIR)
 
 fclean: clean
-	rm -rf $(NAME_PUSH_SWP) $(NAME_CHECKER)
+	rm -rf $(NAME_PUSH_SWP) $(NAME_CHECKER) $(MAIN_PUSH).o $(MAIN_CHECK).o
 	echo "$(YELLOW)$(NAME_PUSH_SWP)$(END) and $(YELLOW)$(NAME_CHECKER)$(END) \t were \t $(GREEN)clean$(END)\n"
 	$(MAKE) fclean -C $(LIB_DIR)
 
 re: fclean all
 
 .PHONY: clean fclean all re t FORCE git
-.SILENT: $(NAME) $(OBJS) $(BUILD_DIR) $(MAIN_OBJ_PS) $(MAIN_OBJ_C) $(LIB_PATH) clean fclean re t FORCE
+.SILENT: $(NAME) $(OBJS) $(BUILD_DIR) $(MAIN_OBJ_PS) $(MAIN_OBJ_C) all re t \
+		$(LIB_PATH) $(NAME_PUSH_SWP) $(NAME_CHECKER) clean fclean run \
+		all
 FORCE:
 
 

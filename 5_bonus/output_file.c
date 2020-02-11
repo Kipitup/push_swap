@@ -6,34 +6,35 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 16:14:47 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/24 12:13:47 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:09:32 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-ssize_t		get_nb_of_move()
+void		write_in_file(t_stack *s, ssize_t fd, int ac, char **av)
 {
-	char		*line;
-	ssize_t		nb_of_move;
-	ssize_t		ret;
-	ssize_t		fd;
+	char		**tmp;
+	size_t		i;
 
-	nb_of_move = 0;
-	fd = open("result/tmp.txt", O_RDWR);
-	if (fd != FAILURE)
+	tmp = NULL;
+	i = 0;
+	if (ac == 1)
 	{
-		while ((ret = get_next_line(fd, &line)) > 0)
+		tmp = ft_strsplit(av[0], ' ');
+		if (tmp == NULL)
+			return (ft_print_err_void(MALLOC_ERR, STD_ERR));
+		while (tmp[i] != '\0')
 		{
-			nb_of_move++;
-			ft_strdel(&line);
+			ft_dprintf(fd, "%s ", tmp[i]);
+			i++;
 		}
+		clean_tmp(&tmp, i);
 	}
-	if (fd == FAILURE || ret == FAILURE)
-		nb_of_move = FAILURE;
-	close(fd);
-	ft_strdel(&line);
-	return (nb_of_move);
+	else
+		while (i < (s->size_a + s->size_b))
+			ft_dprintf(fd, "%s ", av[i++]);
+	ft_dprintf(fd, "\n\n%s", vct_getstr(s->result));
 }
 
 ssize_t		collision_in_filename(t_vector *name, int8_t suffixe)
@@ -46,32 +47,12 @@ ssize_t		collision_in_filename(t_vector *name, int8_t suffixe)
 	if (fd == FAILURE)
 	{
 		vct_pop(name, (1 + ft_int64_t_len((int64_t)suffixe, 10)));
-		suffixe++;
-		fd = collision_in_filename(name, suffixe);
+		fd = collision_in_filename(name, (suffixe + 1));
 	}
 	return (fd);
 }
 
-void		write_final_result(ssize_t fd)
-{
-	char		*line;
-	ssize_t		ret;
-	ssize_t		fd_tmp;
-
-	fd_tmp = open("result/tmp.txt", O_RDWR);
-	if (fd_tmp != FAILURE)
-	{
-		while ((ret = get_next_line(fd_tmp, &line)) > 0)
-		{
-			ft_dprintf(fd, "%s\n", line);
-			ft_strdel(&line);
-		}
-	}
-	close(fd_tmp);
-	ft_strdel(&line);
-}
-
-void		save_final_result_in_file(t_stack *s)
+void		save_final_result_in_file(t_stack *s, int ac, char **av)
 {
 	t_vector	*name;
 	ssize_t		fd;
@@ -79,12 +60,13 @@ void		save_final_result_in_file(t_stack *s)
 	name = vct_newstr("result/");
 	vct_addnb(name, (s->size_a + s->size_b));
 	vct_addstr(name, "_nb_in_");
-	vct_addnb(name, (int64_t)get_nb_of_move());
+	vct_addnb(name, vct_chr_count(s->result, '\n'));
 	vct_addstr(name, "_moves");
 	fd = open(vct_getstr(name), O_RDWR | O_CREAT | O_EXCL, 0744);
 	if (fd == FAILURE)
 		fd = collision_in_filename(name, 1);
-	write_final_result(fd);
+	if (fd != FAILURE)
+		write_in_file(s, fd, ac, av);
 	close(fd);
 	vct_del(&name);
 }

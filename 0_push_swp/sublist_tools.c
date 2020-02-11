@@ -6,46 +6,46 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 17:46:14 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 11:46:00 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_sublist_on_b(t_stack *s)
+void		selection_sort_sublist_on_b(t_stack *s, size_t size)
 {
-	size_t		size;
-
-	// pause_and_show(s);
-	size = s->size_b;
-	while (s->size_b > 0)
+	if (size == (SUBLIST_MIN_SIZE / 2))
+	{
+		if (ft_high(s->a, s->size_a) == s->a[0] && s->size_a > SUBLIST_MIN_SIZE)
+			perfect_sort_for_3_on_top_of_a(s);
+		else
+			perfect_sort_for_3_at_the_bottom_of_a(s);
+	}
+	while (size > 0)
+	{
 		pa_highest(s, s->size_b);
-	while (size > 0)
-	{
-		ra(s);
 		size--;
 	}
 }
 
-void		push_next_sublist_on_b(t_stack *s, size_t size)
+int8_t		solve_when_too_small(t_stack *s)
 {
-	while (size > 0)
+	if (s->size_a == 1)
+		return (SUCCESS);
+	else if (s->size_a == 2)
 	{
-		pb(s);
-		size--;
+		if (s->a[0] < s->a[1])
+			sa(s);
 	}
-}
-
-void		rra_the_remainder(t_stack *s)
-{
-	size_t		remainder_size;
-	size_t		largest_sublist;
-
-	largest_sublist = SUBLIST_MIN_SIZE * ft_pow_positive(2, s->exponent_max);
-	remainder_size = s->size_a + s->size_b - largest_sublist;
-	while (remainder_size > 0)
+	else if (s->size_a == 3)
+		perfect_sort_for_size_a_3(s);
+	else
 	{
-		rra(s);
-		remainder_size--;
+		if (pb_under_pivot(s, (s->size_a - 3), s->size_a) == FAILURE)
+			return (FAILURE);
+		perfect_sort_for_size_a_3(s);
+		while (s->size_b > 0)
+			pa_highest(s, s->size_b);
 	}
+	return (SUCCESS);
 }

@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_n_highest.c                                 :+:      :+:    :+:   */
+/*   vct_chr_str_count.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/30 15:49:09 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/23 21:16:31 by amartino         ###   ########.fr       */
+/*   Created: 2020/01/31 19:02:41 by amartino          #+#    #+#             */
+/*   Updated: 2020/02/03 15:01:42 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "vector.h"
 
-ssize_t		ft_get_n_highest(int32_t *tab, size_t nth, size_t start,
-								size_t limit)
+size_t		vct_chr_str_count(t_vector *vector, char *find)
 {
-	t_heap	*heap;
-	size_t	i;
+	size_t		index;
+	size_t		count;
+	size_t		j;
 
-	i = start;
-	heap = heap_tree((tab + start), limit, MAX_HEAP);
-	if (heap == NULL || nth == 0)
-		return (FAILURE);
-	while (nth > 1)
+	index = 0;
+	count = 0;
+	while (index <= vector->len)
 	{
-		delete_root(heap);
-		nth--;
+		j = 0;
+		if (vector->str[index] == find[j])
+		{
+			while (find[j] != '\0')
+			{
+				if (vector->str[index] != find[j])
+					break ;
+				index++;
+				j++;
+			}
+			if (find[j] == '\0')
+				count++;
+		}
+		else
+			index++;
 	}
-	while (i < (limit + start))
-	{
-		if (tab[i] == heap->a[ROOT])
-			break ;
-		i++;
-	}
-	clean_heap_tree(&heap);
-	return (i);
+	return (count);
 }

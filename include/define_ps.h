@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 17:41:53 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 16:39:51 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,24 @@
 # define TRUE				1
 # define SUCCESS			0
 # define FAILURE			-1
-# define MALLOC_ERR			-1
 # define TEST_ERR			-1
 # define INPUT_ERR			-1
 # define FD_ERR				-1
 # define STD_IN				0
 # define STD_OUT			1
 # define STD_ERR			2
+# define START				0
+# define END				1
 
+# define PAUSE_AND_SHOW		OFF
+# define SUBLIST_MIN_SIZE	6
 # define VERBOSE 			0
 # define NB_OPE				11
 # define NO_OPE				-1
 # define STACK_A			0
 # define STACK_B			1
-# define SUBLIST_MIN_SIZE	3
+# define NONE				-1
+# define EXP_0				0
 
 # define SA					"sa"
 # define SB					"sb"
@@ -43,5 +47,16 @@
 # define RRA				"rra"
 # define RRB				"rrb"
 # define RRR				"rrr"
+
+# define MALLOC_PIVOT		"memory allocation failed when finding pivot index"
+# define WRONG_INPUT		"Wrong input format. Only numbers in numeric format"
+# define WRONG_OPE			"This is not a correct operation."
+# define INPUT_TOO_LONG		"Input too long OR missing a \\n at the end"
+# define INT_MAX_MIN		"You can only give me int. Please do not exceed"
+# define NB_DUPLICATE		"Duplicates numbers are strictly forbidden. Respect"
+# define MALLOC_ERR			"memory allocation failed"
+# define MALLOC_SPLIT_AV	"memory allocation failed when ft_strsplit av"
+# define MALLOC_STRUCT		"memory allocation failed with the structure s"
+# define MALLOC_STACK		"memory allocation failed with the stack"
 
 #endif

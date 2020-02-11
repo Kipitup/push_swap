@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_n_highest.c                                 :+:      :+:    :+:   */
+/*   vct_chr_count.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/30 15:49:09 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/23 21:16:31 by amartino         ###   ########.fr       */
+/*   Created: 2020/01/31 18:51:15 by amartino          #+#    #+#             */
+/*   Updated: 2020/01/31 18:57:22 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "vector.h"
 
-ssize_t		ft_get_n_highest(int32_t *tab, size_t nth, size_t start,
-								size_t limit)
+/*
+**	Search a character in the string and return number of match found.
+*/
+
+size_t	vct_chr_count(t_vector *vector, char c)
 {
-	t_heap	*heap;
-	size_t	i;
+	size_t	index;
+	size_t	count;
 
-	i = start;
-	heap = heap_tree((tab + start), limit, MAX_HEAP);
-	if (heap == NULL || nth == 0)
-		return (FAILURE);
-	while (nth > 1)
+	index = 0;
+	count = 0;
+	while (index <= vector->len)
 	{
-		delete_root(heap);
-		nth--;
+		if (vector->str[index] == c)
+			count++;
+		index++;
 	}
-	while (i < (limit + start))
-	{
-		if (tab[i] == heap->a[ROOT])
-			break ;
-		i++;
-	}
-	clean_heap_tree(&heap);
-	return (i);
+	return (count);
 }

@@ -6,19 +6,19 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 11:03:55 by amartino          #+#    #+#             */
-/*   Updated: 2019/12/01 14:10:31 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:33:04 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "btree.h"
 
-void 	is_parent_valid(t_heap *heap, size_t child)
+void	is_parent_valid(t_heap *heap, size_t child)
 {
 	size_t		parent;
 
 	parent = get_parent(child);
-	if ((heap->type == MIN_HEAP && heap->A[parent] > heap->A[child]) == TRUE
-		|| (heap->type == MAX_HEAP && heap->A[parent] < heap->A[child]) == TRUE)
+	if ((heap->type == MIN_HEAP && heap->a[parent] > heap->a[child]) == TRUE
+		|| (heap->type == MAX_HEAP && heap->a[parent] < heap->a[child]) == TRUE)
 	{
 		swap(heap, parent, child);
 		is_parent_valid(heap, parent);
@@ -32,18 +32,18 @@ void	heapify(t_heap *heap, size_t parent)
 	size_t		extremum;
 
 	l = get_left_child(parent);
-	l = (int32_t)l > heap->A[HEAP_SIZE] ? parent : l;
+	l = (int32_t)l > heap->a[HEAP_SIZE] ? parent : l;
 	r = get_right_child(parent);
-	r = (int32_t)r > heap->A[HEAP_SIZE] ? parent : r;
+	r = (int32_t)r > heap->a[HEAP_SIZE] ? parent : r;
 	if (heap->type == MIN_HEAP)
 	{
-		extremum = heap->A[parent] > heap->A[l] ? l : parent;
-		extremum = heap->A[extremum] > heap->A[r] ? r : extremum;
+		extremum = heap->a[parent] > heap->a[l] ? l : parent;
+		extremum = heap->a[extremum] > heap->a[r] ? r : extremum;
 	}
 	else
 	{
-		extremum = heap->A[parent] < heap->A[l] ? l : parent;
-		extremum = heap->A[extremum] < heap->A[r] ? r : extremum;
+		extremum = heap->a[parent] < heap->a[l] ? l : parent;
+		extremum = heap->a[extremum] < heap->a[r] ? r : extremum;
 	}
 	if (extremum != parent)
 	{

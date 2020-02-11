@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 11:02:18 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/24 18:46:19 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 17:35:18 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,31 @@
 
 void		push_swp(t_stack *s, int ac, char **av)
 {
-	t_stat		*stat;
+	int8_t		ret;
 
-	stat = NULL;
 	s = init_struct(av, ac);
-	s->verbose = TRUE;
-	s->color = TRUE;
-	if (s == NULL)
-		return ;
-	stat = get_stat(s);
-	mkdir("result", 0700);
-	s->fd = open("result/tmp.txt", O_RDWR | O_CREAT, 0744);
-	if (s->fd == FAILURE)
+	if (s != NULL)
 	{
+		mkdir("result", 0700);
+		ret = is_it_sorted(s);
+		if (ret == FAILURE)
+			ft_print_err_void(MALLOC_ERR, STD_ERR);
+		else if (ret == FALSE)
+		{
+			if (s->exponent_max == EXP_0)
+				ret = solve_when_too_small(s);
+			else
+				ret = solve(s);
+			if (ret == SUCCESS)
+				optimize_result(s->result);
+			save_final_result_in_file(s, ac, av);
+			if (s->verbose == TRUE)
+				print_stack(s, NO_OPE, 0);
+			if (ret == SUCCESS)
+				ft_dprintf(STD_OUT, "%s", vct_getstr(s->result));
+		}
 		clean_struct(&s);
-		return (ft_print_err_void("when creating result file", STD_ERR));
 	}
-	if (solve(s) == FAILURE)
-		return ; //need protection, clean and quit
-	if (s->verbose == TRUE)
-		print_stack(s, NO_OPE, 0);
-	ft_printf("gonna save result\n");
-	save_final_result_in_file(s);
-	clean_struct(&s);
-	ft_memdel((void**)&stat);
 }
 
 int			main(int ac, char **av)

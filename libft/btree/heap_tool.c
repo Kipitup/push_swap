@@ -29,9 +29,9 @@ void	swap(t_heap *heap, size_t parent, size_t child)
 {
 	int32_t		tmp;
 
-	tmp = heap->A[parent];
-	heap->A[parent] = heap->A[child];
-	heap->A[child] = tmp;
+	tmp = heap->a[parent];
+	heap->a[parent] = heap->a[child];
+	heap->a[child] = tmp;
 }
 
 size_t	get_parent(size_t index)

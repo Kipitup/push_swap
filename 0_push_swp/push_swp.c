@@ -6,126 +6,114 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:28:51 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/27 17:48:15 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 11:59:03 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void 		split_stack_in_2_big_part(t_stack *s)
+size_t		sub_size_for_exponent(size_t exponent)
 {
-	size_t		sublist_size;
-	int32_t		pivot;
-
-	sublist_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, (s->exponent_max - 1));
-	pivot = s->sorted_s[sublist_size - 1];
-	pb_under_pivot(s, pivot, s->size_a);
+	return (SUBLIST_MIN_SIZE * ft_pow_positive(2, exponent));
 }
 
-int8_t		organize_stack_b_in_unsorted_sublist(t_stack *s)
+ssize_t		split_stack_in_2_big_part(t_stack *s)
 {
-	int32_t 	pivot;
-	int32_t 	pivot_index;
+	size_t		sublist_size;
+	size_t		nth;
+
+	if (s->size_b == 0)
+	{
+		sublist_size = sub_size_for_exponent(s->exponent_max - 1);
+		nth = s->size_a - sublist_size;
+		if (pb_under_pivot(s, nth, s->size_a) == FAILURE)
+			return (FAILURE);
+		return (SUCCESS);
+	}
+	else
+	{
+		s->exponent_max = 0;
+		while (sub_size_for_exponent(s->exponent_max + 1) <= s->size_b)
+			s->exponent_max++;
+		sublist_size = sub_size_for_exponent(s->exponent_max - 1);
+		nth = s->size_b - sublist_size + 1;
+		if (pa_above_pivot(s, nth, s->size_b) == FAILURE)
+			return (FAILURE);
+		return (sublist_size);
+	}
+}
+
+int8_t		organize_a_in_unsorted_sublist(t_stack *s, size_t to_ignore)
+{
+	size_t		size;
 	int8_t		ret;
 
 	ret = SUCCESS;
-	if (s->size_b > SUBLIST_MIN_SIZE)
+	pause_and_show(s);
+	if (s->size_a > (SUBLIST_MIN_SIZE + to_ignore))
 	{
-		pivot_index = ft_get_n_highest(s->b, (s->size_b / 2), 0, s->size_b);
-		if (pivot_index == FAILURE)
-			return (ft_print_err_failure("malloc, finding pivot index", STD_ERR));
-		pivot = s->b[pivot_index];
-		pa_above_pivot(s, pivot, s->size_b);
-		ret = organize_stack_b_in_unsorted_sublist(s);
+		size = s->size_a - to_ignore;
+		ret = pb_under_pivot(s, (size / 2), size);
+		if (ret == SUCCESS)
+			ret = organize_a_in_unsorted_sublist(s, to_ignore);
 	}
 	return (ret);
 }
 
-int8_t		let_the_magic_of_recursion_happen(t_stack *s, size_t exponent, size_t exponent_max)
+int8_t		divide_and_conquer(t_stack *s, size_t exponent, size_t exponent_max)
 {
 	size_t		sublist_size;
+	size_t		to_ignore;
+	size_t		nth;
 	int8_t		ret;
 
 	ret = SUCCESS;
-	sublist_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, exponent);
-	push_next_sublist_on_b(s, sublist_size);
-	if (exponent > 0)
-	{
-		ret = organize_stack_b_in_unsorted_sublist(s);
-		if (ret == FAILURE)
-			return (FAILURE);
-		sort_sublist_on_b(s);
-		ret = let_the_magic_of_recursion_happen(s, 0, (exponent - 1));
-	}
+	sublist_size = sub_size_for_exponent(exponent);
+	if (exponent == 0)
+		selection_sort_sublist_on_b(s, SUBLIST_MIN_SIZE);
 	else
-		sort_sublist_on_b(s);
+	{
+		nth = s->size_b - (sublist_size / 2) + 1;
+		ret = pa_above_pivot(s, nth, sublist_size);
+		to_ignore = s->size_a - (sublist_size / 2);
+		if (ret == SUCCESS)
+			ret = organize_a_in_unsorted_sublist(s, to_ignore);
+		if (ret == SUCCESS)
+			ret = pb_under_pivot(s, (SUBLIST_MIN_SIZE / 2), SUBLIST_MIN_SIZE);
+		selection_sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
+		if (ret == SUCCESS)
+			ret = divide_and_conquer(s, EXP_0, (exponent - 1));
+	}
 	if (exponent < exponent_max && ret == SUCCESS)
-		ret = let_the_magic_of_recursion_happen(s, (exponent + 1), exponent_max);
-	return (SUCCESS);
+		ret = divide_and_conquer(s, (exponent + 1), exponent_max);
+	return (ret);
 }
-
-int8_t		pb_second_half(t_stack *s);
-void		sort_remainder(t_stack *s);
-
-// ft_printf("before magic function first\n");
-// ft_printf("after pb second half\n");
 
 int8_t		solve(t_stack *s)
 {
+	ssize_t		sublis_size;
 	int8_t		ret;
 
 	ret = SUCCESS;
 	if (s->exponent_max > 0)
 	{
-		split_stack_in_2_big_part(s);
-		ret = organize_stack_b_in_unsorted_sublist(s);
-		sort_sublist_on_b(s);
-		if (s->exponent_max > 1 && ret == SUCCESS)
-			ret = let_the_magic_of_recursion_happen(s, 0, (s->exponent_max - 2));
+		sublis_size = split_stack_in_2_big_part(s);
+		ret = sublis_size == FAILURE ? FAILURE : SUCCESS;
+		sublis_size = sublis_size > 0 ? s->size_a - sublis_size : sublis_size;
 		if (ret == SUCCESS)
-			ret = pb_second_half(s);
+			ret = organize_a_in_unsorted_sublist(s, (size_t)sublis_size);
 		if (ret == SUCCESS)
-			ret = organize_stack_b_in_unsorted_sublist(s);
-		sort_sublist_on_b(s);
+			ret = pb_under_pivot(s, (SUBLIST_MIN_SIZE / 2), SUBLIST_MIN_SIZE);
+		selection_sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
 		if (s->exponent_max > 1 && ret == SUCCESS)
-			ret = let_the_magic_of_recursion_happen(s, 0, (s->exponent_max - 2));
+		{
+			ret = divide_and_conquer(s, EXP_0, (s->exponent_max - 2));
+			if (ret == SUCCESS)
+				ret = solve(s);
+		}
 	}
 	if (ret == SUCCESS)
-		sort_remainder(s);
+		while (s->size_b > 0)
+			pa_highest(s, s->size_b);
 	return (ret);
-}
-
-int8_t		pb_second_half(t_stack *s)
-{
-	size_t		sublist_size;
-	size_t		size;
-	int32_t 	pivot_index;
-	int32_t		pivot;
-
-	sublist_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, (s->exponent_max - 1));
-	size = s->size_a - sublist_size;
-	pivot_index = ft_get_n_smallest(s->a, sublist_size, sublist_size, size);
-	if (pivot_index == FAILURE)
-		return (ft_print_err_failure("malloc, finding pivot index", STD_ERR));
-	pivot = s->a[pivot_index];
-	pb_under_pivot(s, pivot, size);
-	rra_the_remainder(s);
-	return (SUCCESS);
-}
-
-void		sort_remainder(t_stack *s)
-{
-	size_t		remainder_size;
-	size_t		largest_sublist;
-
-	ft_printf("s->exponent_max %zu\n", s->exponent_max);
-	if (s->exponent_max > 0)
-	{
-		largest_sublist = SUBLIST_MIN_SIZE * ft_pow_positive(2, s->exponent_max);
-		remainder_size = s->size_a + s->size_b - largest_sublist;
-	}
-	else
-		remainder_size = s->size_a + s->size_b;
-	push_next_sublist_on_b(s, remainder_size);
-	sort_sublist_on_b(s);
 }

@@ -6,17 +6,21 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 15:00:45 by amartino          #+#    #+#             */
-/*   Updated: 2019/11/28 15:27:42 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:10:58 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
 /*
-**	Print the vector
+**	Print the vector and a new line
 */
 
 void	vct_print(t_vector *vector)
 {
-	write(1, vector->str, vector->len);
+	if (vector != NULL && vector->str != NULL)
+	{
+		write(1, vector->str, vector->len);
+		write(1, "\n", 1);
+	}
 }

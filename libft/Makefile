@@ -6,7 +6,7 @@
 #    By: fkante <fkante@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/19 17:11:38 by fkante            #+#    #+#              #
-#    Updated: 2020/01/23 21:09:44 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/06 14:20:39 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ INCLUDES = -I./includes
 HEAD += ./includes/libft.h
 HEAD += ./includes/vector.h
 
+SRCS += ft_memalloc.c
+# SRCS += ft_malloc_debug.c
 SRCS += ft_atoi.c
 SRCS += ft_bzero.c
 SRCS += ft_isalnum.c
@@ -39,7 +41,6 @@ SRCS += ft_lstiter.c
 SRCS += ft_lstnew.c
 SRCS += ft_lstmap.c
 SRCS += ft_lstfindone.c
-SRCS += ft_memalloc.c
 SRCS += ft_memccpy.c
 SRCS += ft_memchr.c
 SRCS += ft_memcmp.c
@@ -108,6 +109,7 @@ SRCS += ft_fldtoa.c
 SRCS += get_next_line.c
 SRCS += ft_printf.c
 SRCS += ft_atol.c
+SRCS += ft_log2_n.c
 
 #------------------------------------ STAT ------------------------------------#
 SRCS += ft_get_high.c
@@ -129,8 +131,10 @@ SRCS += vct_del.c
 SRCS += vct_new.c
 SRCS += vct_newstr.c
 SRCS += vct_addstr.c
+SRCS += vct_addnstr.c
 SRCS += vct_pop.c
 SRCS += vct_dup.c
+SRCS += vct_ndup.c
 SRCS += vct_addchar.c
 SRCS += vct_increase_scale.c
 SRCS += vct_bzero.c
@@ -147,12 +151,18 @@ SRCS += vct_pushstr.c
 SRCS += vct_apply.c
 SRCS += vct_replace_char_at.c
 SRCS += vct_replace_char.c
+SRCS += vct_replace_str.c
 SRCS += vct_addstr_at.c
 SRCS += vct_chr.c
 SRCS += vct_chr_str.c
 SRCS += vct_getchar_at.c
 SRCS += vct_print.c
 SRCS += vct_addnb.c
+SRCS += vct_chr_count.c
+SRCS += vct_chr_str_count.c
+SRCS += vct_sub.c
+SRCS += vct_read_line.c
+SRCS +=	vct_read_line_for_push_swap.c
 
 #----------------------------------- BTREE ------------------------------------#
 SRCS += heap_build.c
@@ -179,6 +189,7 @@ PATH_SRCS += ./number
 PATH_SRCS += ./string
 PATH_SRCS += ./memory
 PATH_SRCS += ./print
+PATH_SRCS += ./math
 PATH_SRCS += .
 
 vpath %.c $(PATH_SRCS)
