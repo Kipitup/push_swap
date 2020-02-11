@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:43 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/04 16:45:14 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:44:34 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		fill_in_static_variable(t_stack *s, char **tab, size_t size)
 		s->exponent_max++;
 }
 
-t_stack		*fill_stack(t_stack *s, size_t start, char **tab, size_t len)
+t_stack		*fill_stack(t_stack *s, size_t start, char **av, size_t len)
 {
 	int64_t		tmp;
 	size_t		i;
@@ -31,7 +31,7 @@ t_stack		*fill_stack(t_stack *s, size_t start, char **tab, size_t len)
 	while (len > start && s != NULL)
 	{
 		len--;
-		tmp = ft_atol(tab[len]);
+		tmp = ft_atol(av[len]);
 		if (tmp > INT_MAX || tmp < INT_MIN)
 			clean_struct(&s);
 		else
@@ -45,19 +45,19 @@ t_stack		*fill_stack(t_stack *s, size_t start, char **tab, size_t len)
 	return (s == NULL ? ft_print_err_null(NB_DUPLICATE, STD_ERR) : s);
 }
 
-t_stack		*create_stack(char **tab, size_t len)
+t_stack		*create_stack(char **av, size_t len)
 {
 	t_stack		*s;
 	ssize_t		start;
 
 	s = NULL;
-	start = parse_args(tab, len);
+	start = parse_args(av, len);
 	if (start == FAILURE)
 		return (ft_print_err_null(WRONG_INPUT, STD_ERR));
 	s = ft_memalloc(sizeof(t_stack));
 	if (s == NULL)
 		return (ft_print_err_null(MALLOC_STRUCT, STD_ERR));
-	fill_in_static_variable(s, tab, (len - (size_t)start));
+	fill_in_static_variable(s, av, (len - (size_t)start));
 	s->a = ft_memalloc(sizeof(int) * (len - start));
 	s->b = ft_memalloc(sizeof(int) * (len - start));
 	s->result = vct_new(ft_log2_n(s->size_a) * (3 * s->size_a));
@@ -66,7 +66,7 @@ t_stack		*create_stack(char **tab, size_t len)
 		clean_struct(&s);
 		return (ft_print_err_null(MALLOC_STACK, STD_ERR));
 	}
-	s = fill_stack(s, start, tab, len);
+	s = fill_stack(s, start, av, len);
 	return (s);
 }
 

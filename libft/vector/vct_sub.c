@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 15:57:53 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/05 16:55:04 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:38:02 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vector 	*vct_sub(t_vector *vector, size_t start, size_t len)
 	if (vector == NULL || vector->str == NULL || start > vector->len)
 		return (NULL);
 	len = len > (vector->len - start) ? (vector->len - start) : len;
-	new_vector = vct_new(len);
+	new_vector = vct_new(len + 1);
 	if (new_vector != NULL)
 	{
 		ft_strncpy(new_vector->str, (vector->str + start), len);

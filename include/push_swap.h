@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/06 14:17:43 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 18:10:49 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ enum	e_operations
 ** ############################################################################
 */
 t_stack			*init_struct(char **av, int ac);
-t_stack			*create_stack(char **tab, size_t len);
-t_stack			*fill_stack(t_stack *s, size_t start, char **tab, size_t len);
+t_stack			*create_stack(char **av, size_t len);
+t_stack			*fill_stack(t_stack *s, size_t start, char **av, size_t len);
 uint8_t			check_no_double(t_stack *s);
 ssize_t			parse_args(char **av, int32_t ac);
 int8_t			check_err(char *str, size_t j);
-uint8_t			check_for_bonus(char **tab, char *chr);
+uint8_t			check_for_bonus(char **av, char *chr);
 
 /*
 ** ############################################################################
@@ -83,7 +83,7 @@ void			pa_highest(t_stack *s, size_t limit);
 int8_t			pb_under_pivot(t_stack *s, size_t nth, size_t limit);
 int8_t			pa_above_pivot(t_stack *s, size_t nth, size_t limit);
 void			optimize_result(t_vector *vector);
-void			sort_sublist_on_b(t_stack *s, size_t size);
+void			selection_sort_sublist_on_b(t_stack *s, size_t size);
 void			perfect_sort_for_3_on_top_of_a(t_stack *s);
 void			perfect_sort_for_3_at_the_bottom_of_a(t_stack *s);
 void 			perfect_sort_for_size_a_3(t_stack *s);
@@ -110,7 +110,7 @@ t_stat 			*get_stat(t_stack *s);
 ssize_t			get_nb_of_move();
 ssize_t			collision_in_filename(t_vector *name, int8_t suffixe);
 void			write_final_result(ssize_t fd);
-void			save_final_result_in_file(t_stack *s);
+void			save_final_result_in_file(t_stack *s, int ac, char **av);
 void			pause_and_show(t_stack *s);
 
 

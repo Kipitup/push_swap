@@ -6,17 +6,19 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 15:08:41 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/06 14:35:22 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 09:28:54 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
 /*
-**	Read the next line from the given fd.
+**	Read the next line from the given fd for the push swap project.
+**	If there is no line found in the first read, then error.
+**	If the file doesn't end with a '\n', then error
 */
 
-int8_t	parse_line(t_vector *vector, t_vector **line, uint8_t the_end)
+int8_t	parse_line_ps(t_vector *vector, t_vector **line, uint8_t the_end)
 {
 	ssize_t	index;
 	int8_t	ret;
@@ -43,7 +45,7 @@ int8_t	parse_line(t_vector *vector, t_vector **line, uint8_t the_end)
 	return (ret);
 }
 
-int8_t	read_file(t_vector *vector, t_vector **line, const int fd)
+int8_t	read_file_ps(t_vector *vector, t_vector **line, const int fd)
 {
 	ssize_t		ret;
 	char		buff[BUFF_SIZE + 1];
@@ -53,7 +55,7 @@ int8_t	read_file(t_vector *vector, t_vector **line, const int fd)
 	if (vct_addnstr(vector, buff, ret) == FAILURE)
 		return (FAILURE);
 	if (vct_chr(vector, '\n') >= 0)
-		return (parse_line(vector, line, FALSE));
+		return (parse_line_ps(vector, line, FALSE));
 	else if (vector->len > 0)
 		ret = FAILURE;
 	return (ret);
@@ -78,9 +80,9 @@ int8_t		vct_read_line_for_push_swap(const int fd, t_vector **line)
 			return (FAILURE);
 	}
 	if (vct_len(vector) > 0)
-		ret = parse_line(vector, line, FALSE);
+		ret = parse_line_ps(vector, line, FALSE);
 	if (ret == FALSE)
-		ret = read_file(vector, line, fd);
+		ret = read_file_ps(vector, line, fd);
 	if (ret == FAILURE)
 		vct_del(&vector);
 	return (ret);

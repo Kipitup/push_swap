@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 10:28:51 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/05 11:30:52 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 12:00:47 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,51 +60,54 @@ int8_t		organize_a_in_unsorted_sublist(t_stack *s, size_t to_ignore)
 	return (ret);
 }
 
-int8_t		let_the_magic_of_recursion_happen(t_stack *s, size_t exponent, size_t exponent_max)
+int8_t		divide_and_conquer(t_stack *s, size_t exponent, size_t exponent_max)
 {
 	size_t		sublist_size;
+	size_t		to_ignore;
+	size_t		nth;
 	int8_t		ret;
 
 	ret = SUCCESS;
 	sublist_size = sub_size_for_exponent(exponent);
-	if (exponent == 0 && ret == SUCCESS)
-		sort_sublist_on_b(s, SUBLIST_MIN_SIZE);
+	if (exponent == 0)
+		selection_sort_sublist_on_b(s, SUBLIST_MIN_SIZE);
 	else
 	{
-		pause_and_show(s);
-		ret = pa_above_pivot(s, (1 + s->size_b - (sublist_size / 2)), sublist_size);
+		nth = s->size_b - (sublist_size / 2) + 1;
+		ret = pa_above_pivot(s, nth, sublist_size);
+		to_ignore = s->size_a - (sublist_size / 2);
 		if (ret == SUCCESS)
-			ret = organize_a_in_unsorted_sublist(s, (s->size_a - (sublist_size / 2)));
+			ret = organize_a_in_unsorted_sublist(s, to_ignore);
 		if (ret == SUCCESS)
 			ret = pb_under_pivot(s, (SUBLIST_MIN_SIZE / 2), SUBLIST_MIN_SIZE);
-		sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
+		selection_sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
 		if (ret == SUCCESS)
-			ret = let_the_magic_of_recursion_happen(s, 0, (exponent - 1));
+			ret = divide_and_conquer(s, EXP_0, (exponent - 1));
 	}
 	if (exponent < exponent_max && ret == SUCCESS)
-		ret = let_the_magic_of_recursion_happen(s, (exponent + 1), exponent_max);
+		ret = divide_and_conquer(s, (exponent + 1), exponent_max);
 	return (ret);
 }
 
 int8_t		solve(t_stack *s)
 {
-	ssize_t		size;
+	ssize_t		sublist_size;
 	int8_t		ret;
 
 	ret = SUCCESS;
 	if (s->exponent_max > 0)
 	{
-		size = split_stack_in_2_big_part(s);
-		ret = size == FAILURE ? FAILURE : SUCCESS;
-		size = size > 0 ? s->size_a - size : size;
+		sublist_size = split_stack_in_2_big_part(s);
+		ret = sublist_size == FAILURE ? FAILURE : SUCCESS;
+		sublist_size = sublist_size > 0 ? s->size_a - sublist_size : sublist_size;
 		if (ret == SUCCESS)
-			ret = organize_a_in_unsorted_sublist(s, (size_t)size);
+			ret = organize_a_in_unsorted_sublist(s, (size_t)sublist_size);
 		if (ret == SUCCESS)
 			ret = pb_under_pivot(s, (SUBLIST_MIN_SIZE / 2), SUBLIST_MIN_SIZE);
-		sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
+		selection_sort_sublist_on_b(s, (SUBLIST_MIN_SIZE / 2));
 		if (s->exponent_max > 1 && ret == SUCCESS)
 		{
-			ret = let_the_magic_of_recursion_happen(s, 0, (s->exponent_max - 2));
+			ret = divide_and_conquer(s, EXP_0, (s->exponent_max - 2));
 			if (ret == SUCCESS)
 				ret = solve(s);
 		}

@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:59 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 10:40:15 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:44:25 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ uint8_t		check_no_double(t_stack *s)
 	return (TRUE);
 }
 
-uint8_t		check_for_bonus(char **tab, char *chr)
+uint8_t		check_for_bonus(char **av, char *chr)
 {
 	uint8_t		ret;
 
 	ret = FALSE;
-	if ((ft_strequ(tab[0], chr) == TRUE) || (ft_strequ(tab[1], chr) == TRUE))
+	if ((ft_strequ(av[0], chr) == TRUE) || (ft_strequ(av[1], chr) == TRUE))
 		ret = TRUE;
 	return (ret);
 }
@@ -67,7 +67,7 @@ int8_t		check_err(char *str, size_t j)
 	return (count);
 }
 
-ssize_t		parse_args(char **tab, int32_t len)
+ssize_t		parse_args(char **av, int32_t len)
 {
 	size_t	i;
 	size_t	j;
@@ -79,11 +79,11 @@ ssize_t		parse_args(char **tab, int32_t len)
 	while ((int32_t)i < len)
 	{
 		j = 0;
-		while (tab[i][j] != '\0')
+		while (av[i][j] != '\0')
 		{
-			if (ft_isdigit((int)tab[i][j]) == FALSE)
+			if (ft_isdigit((int)av[i][j]) == FALSE)
 			{
-				if ((tmp = check_err(tab[i], j)) == FAILURE)
+				if ((tmp = check_err(av[i], j)) == FAILURE)
 					return (FAILURE);
 				else
 					ret += tmp;

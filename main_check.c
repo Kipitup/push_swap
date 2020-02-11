@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:57:10 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/06 14:32:49 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 09:32:17 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,3 +62,16 @@ int			main(int ac, char **av)
 		ft_print_err_false("Not enough arguments", STD_ERR);
 	return (SUCCESS);
 }
+
+
+// {
+// 	t_vector *line = NULL;
+// 	int fd;
+// 	int ret;
+// 	fd = open(av[1], O_RDWR, 0744);
+// 	while ((ret = vct_read_line(fd, &line) > 0))
+// 	{
+// 		ft_printf("line |%s|\nret: %d\n", line->str, ret);
+// 		vct_del(&line);
+// 	}
+// }

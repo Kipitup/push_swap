@@ -6,13 +6,13 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/04 14:25:42 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 11:46:00 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_sublist_on_b(t_stack *s, size_t size)
+void		selection_sort_sublist_on_b(t_stack *s, size_t size)
 {
 	if (size == (SUBLIST_MIN_SIZE / 2))
 	{
