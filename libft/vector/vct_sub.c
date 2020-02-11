@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_n_highest.c                                 :+:      :+:    :+:   */
+/*   vct_sub.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/30 15:49:09 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/23 21:16:31 by amartino         ###   ########.fr       */
+/*   Created: 2020/02/05 15:57:53 by amartino          #+#    #+#             */
+/*   Updated: 2020/02/11 12:11:20 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btree.h"
+#include "vector.h"
 
-ssize_t		ft_get_n_highest(int32_t *tab, size_t nth, size_t start,
-								size_t limit)
+t_vector	*vct_sub(t_vector *vector, size_t start, size_t len)
 {
-	t_heap	*heap;
-	size_t	i;
+	t_vector	*new_vector;
 
-	i = start;
-	heap = heap_tree((tab + start), limit, MAX_HEAP);
-	if (heap == NULL || nth == 0)
-		return (FAILURE);
-	while (nth > 1)
+	if (vector == NULL || vector->str == NULL || start > vector->len)
+		return (NULL);
+	len = len > (vector->len - start) ? (vector->len - start) : len;
+	new_vector = vct_new(len + 1);
+	if (new_vector != NULL)
 	{
-		delete_root(heap);
-		nth--;
+		ft_strncpy(new_vector->str, (vector->str + start), len);
+		new_vector->len = len;
 	}
-	while (i < (limit + start))
-	{
-		if (tab[i] == heap->a[ROOT])
-			break ;
-		i++;
-	}
-	clean_heap_tree(&heap);
-	return (i);
+	return (new_vector);
 }

@@ -26,3 +26,6 @@ libftprintf/*.a
 *.su
 *.idb
 *.pdb
+
+#result
+result/*

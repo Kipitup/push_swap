@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 15:28:28 by amartino          #+#    #+#             */
-/*   Updated: 2019/09/20 10:19:14 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:14:05 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Remove a certain number of characters from the index of the string
 */
 
-void	vct_pop_from(t_vector *vector, size_t len, size_t index)
+int8_t		vct_pop_from(t_vector *vector, size_t len, size_t index)
 {
 	t_vector	*tmp;
 
@@ -36,7 +36,9 @@ void	vct_pop_from(t_vector *vector, size_t len, size_t index)
 				vector->len -= len;
 				vector->str[vector->len] = '\0';
 				vct_del(&tmp);
+				return (SUCCESS);
 			}
 		}
 	}
+	return (FAILURE);
 }

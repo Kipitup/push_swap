@@ -3,85 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fkante <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 10:35:22 by fkante            #+#    #+#             */
-/*   Updated: 2019/07/15 15:55:38 by fkante           ###   ########.fr       */
+/*   Updated: 2020/01/31 14:14:07 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	countchar(char const *s, char c)
+static int		ft_word_count(char const *s, char c)
 {
-	int i;
-
-	i = 0;
-	while (*s == c)
-		s++;
-	while (*s && *s != c)
-	{
-		s++;
-		i++;
-	}
-	return (i);
-}
-
-static int	countword(char const *s, char c)
-{
-	int		count;
-	int		i;
-	int		state;
+	size_t		count;
 
 	count = 0;
-	i = 0;
-	state = 0;
-	while (s[i])
+	while (*s)
 	{
-		if (s[i + 1] == c)
-			state = 0;
-		else if (state == 0 || s[i + 1] == '\0')
-		{
-			state = 1;
+		if (*s != c)
 			count++;
-		}
-		i++;
+		while (*s != c && *s)
+			s++;
+		while (*s == c && *s)
+			s++;
 	}
 	return (count);
 }
 
-static char	**free_s(char **s, size_t i)
+static void		ft_clean(char **tab, int i)
 {
-	while (i-- != 0)
-		ft_strdel(&(s[i]));
-	ft_memdel((void**)&s);
-	s = NULL;
-	return (NULL);
+	while (--i >= 0)
+		ft_strdel(&tab[i]);
+	free(tab);
+	tab = NULL;
 }
 
-char		**ft_strsplit(char const *s, char c)
+static char		**ft_fill(char const *s, char c, char **tab, int count)
 {
-	char	**str_splited;
-	int		nb_word;
-	int		nb_char;
-	int		index;
+	int		i;
+	int		j;
+	int		k;
 
-	if (s == NULL || c == 0)
-		return (NULL);
-	nb_word = countword(s, c);
-	index = 0;
-	if (!(str_splited = (char**)ft_memalloc((nb_word + 1) * sizeof(char*))))
-		return (NULL);
-	while (index < nb_word - 1)
+	i = -1;
+	while (++i < count)
 	{
-		while (*s == c)
+		j = 0;
+		k = 0;
+		while (*s == c && *s)
 			s++;
-		nb_char = countchar(s, c);
-		if (!(str_splited[index] = ft_strsub(s, 0, nb_char)))
-			return (free_s(str_splited, index));
-		s = s + nb_char;
-		index++;
+		while ((s[j] != c) && s[j])
+			j++;
+		if (!(tab[i] = (char*)malloc(sizeof(char) * (j + 1))))
+		{
+			ft_clean(tab, i);
+			return (NULL);
+		}
+		while (--j >= 0)
+			tab[i][k++] = (char)*s++;
+		tab[i][k] = '\0';
 	}
-	str_splited[index] = NULL;
-	return (str_splited);
+	tab[i] = 0;
+	return (tab);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	int		count;
+	char	**tab;
+
+	if (!s)
+		return (NULL);
+	count = ft_word_count(s, c);
+	if (!(tab = (char**)malloc(sizeof(char *) * (count + 1))))
+		return (NULL);
+	return (ft_fill(s, c, tab, count) ? tab : NULL);
 }

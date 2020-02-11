@@ -6,34 +6,35 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 11:17:18 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/23 17:33:05 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 12:32:37 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "btree.h"
-#include <stdio.h>
+#include "ft_printf.h"
 
 /*
 **	Recursively print the tree.
-
+**
 **	Index will usually start at 1, since index 0 is reserved for the HEAP SIZE.
-**	deep variable start at 0. 
+**	deep variable start at 0.
 */
 
 void	print_heap_tree(t_heap *heap, size_t index, size_t deep)
 {
 	size_t		space;
+	size_t		i;
 
+	i = 0;
 	space = NB_OF_SPACE * deep;
-	if ((int32_t)index > heap->A[HEAP_SIZE])
+	if ((int32_t)index > heap->a[HEAP_SIZE])
 		return ;
-
 	print_heap_tree(heap, get_right_child(index), deep + 1);
-
-	// printf("\n");
-    for (size_t i = 0; i < space; i++)
-        printf(" ");
-    printf("%d\n", heap->A[index]);
-
+	while (i < space)
+	{
+		ft_printf(" ");
+		i++;
+	}
+	ft_printf("%d\n", heap->a[index]);
 	print_heap_tree(heap, get_left_child(index), deep + 1);
 }

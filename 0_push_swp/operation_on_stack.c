@@ -6,103 +6,106 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 18:34:04 by fkante            #+#    #+#             */
-/*   Updated: 2020/01/29 17:35:07 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 11:47:45 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pb_lowest(t_stack *s, size_t limit)
-{
-	size_t	min_index;
-	size_t	center;
-
-	center = s->size_a / 2;
-	min_index = ft_get_low_in_range(s->a, s->size_a - limit, s->size_a);
-	while (min_index != s->size_a - 1)
-	{
-		if (min_index > center)
-		{
-			ra(s);
-			min_index++;
-		}
-		else
-		{
-			rra(s);
-			if (min_index == 0)
-				min_index = s->size_a - 1;
-			else
-				min_index--;
-		}
-	}
-	pb(s);
-}
-
 void	pa_highest(t_stack *s, size_t limit)
 {
-	size_t	max_index;
+	size_t	index_highest;
 	size_t	center;
 
 	center = s->size_b / 2;
-	max_index = ft_get_high_in_range(s->b, s->size_b - limit, s->size_b);
-	while (max_index != s->size_b - 1)
+	index_highest = ft_get_high_in_range(s->b, (s->size_b - limit), s->size_b);
+	while (index_highest != (s->size_b - 1))
 	{
-		if (max_index > center)
+		if (index_highest > center)
 		{
 			rb(s);
-			max_index++;
+			index_highest++;
 		}
 		else
 		{
 			rrb(s);
-			if (max_index == 0)
-				max_index = s->size_b - 1;
+			if (index_highest == 0)
+				index_highest = s->size_b - 1;
 			else
-				max_index--;
+				index_highest--;
 		}
 	}
 	pa(s);
 }
 
-void	pb_under_pivot(t_stack *s, size_t pivot_index, size_t limit)
+int8_t	pb_under_pivot(t_stack *s, size_t nth, size_t limit)
 {
 	size_t		last;
+	ssize_t		index;
 	int32_t		pivot;
-	uint8_t		start_or_end;
+	uint8_t		is_end;
 
-	pivot = s->a[pivot_index];
-	if (pivot_index < limit && limit < s->size_a)
-		start_or_end = START;
-	else
-		start_or_end = END;
+	pause_and_show(s);
+	if ((index = ft_get_n_smallest(s->a, nth, START, s->size_a)) == FAILURE)
+		return (ft_print_err_failure(MALLOC_PIVOT, STD_ERR));
+	pivot = s->a[index];
+	is_end = ((size_t)index < limit && limit < s->size_a) ? START : END;
 	while (limit > 0)
 	{
 		last = s->size_a - 1;
-		if (start_or_end == END)
-		{
+		if (is_end == END)
 			s->a[last] <= pivot ? pb(s) : ra(s);
-		}
 		else
 		{
 			rra(s);
 			if (s->a[last] <= pivot)
 				pb(s);
-
 		}
 		limit--;
 	}
+	return (SUCCESS);
 }
 
-void	pa_above_pivot(t_stack *s, size_t pivot_index, size_t limit)
+int8_t	pa_above_pivot(t_stack *s, size_t nth, size_t limit)
 {
-	size_t	last;
-	int32_t pivot;
+	size_t		last;
+	ssize_t		index;
+	int32_t		pivot;
+	uint8_t		is_end;
 
-	pivot = s->b[pivot_index];
+	pause_and_show(s);
+	if ((index = ft_get_n_smallest(s->b, nth, START, s->size_b)) == FAILURE)
+		return (ft_print_err_failure(MALLOC_PIVOT, STD_ERR));
+	pivot = s->b[index];
+	is_end = ((size_t)index < limit && limit < s->size_b) ? START : END;
 	while (limit > 0)
 	{
 		last = s->size_b - 1;
-		s->b[last] > pivot ? pa(s) : rb(s);
+		if (is_end == END)
+			s->b[last] >= pivot ? pa(s) : rb(s);
+		else
+		{
+			rrb(s);
+			if (s->b[last] >= pivot)
+				pa(s);
+		}
 		limit--;
 	}
+	return (SUCCESS);
+}
+
+void	optimize_result(t_vector *vector)
+{
+	vct_replace_str(vector, "\nrra\nra\n", "\n");
+	vct_replace_str(vector, "\nra\nrra\n", "\n");
+	vct_replace_str(vector, "\npa\npb\n", "\n");
+	vct_replace_str(vector, "\npb\npa\n", "\n");
+	vct_replace_str(vector, "\nrrb\nrb\n", "\n");
+	vct_replace_str(vector, "\nrb\nrrb\n", "\n");
+	vct_replace_str(vector, "\nrb\nra\n", "\nrr\n");
+	vct_replace_str(vector, "\nra\nrb\n", "\nrr\n");
+	vct_replace_str(vector, "\nrra\nrrb\n", "\nrrr\n");
+	vct_replace_str(vector, "\nrra\nrrb\n", "\nrrr\n");
+	vct_replace_str(vector, "\nsa\nsb\n", "\nss\n");
+	vct_replace_str(vector, "\nsb\nsa\n", "\nss\n");
 }

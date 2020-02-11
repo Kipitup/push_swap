@@ -6,39 +6,51 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 10:39:19 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/20 16:59:19 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/11 17:31:16 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	read_checker(t_stack *s)
+int8_t	read_checker(t_stack *s)
 {
-	operfunc	func_ptr[NB_OPE] = {swap_stack_a, swap_stack_b, swap_both,
-							push_stack_a, push_stack_b, rotate_stack_a,
-							rotate_stack_b, rotate_both, reverse_rotate_stack_a,
-							reverse_rotate_stack_b, reverse_both};
-	char		*line;
-	size_t		count;
+	static t_operfunc	func_ptr[NB_OPE] = {swap_stack_a, swap_stack_b,
+										swap_both, push_stack_a, push_stack_b,
+										rotate_stack_a, rotate_stack_b,
+										rotate_both, reverse_rotate_stack_a,
+										reverse_rotate_stack_b, reverse_both};
+	t_vector			*line;
+	size_t				count;
+	int8_t				ret;
 
 	count = 0;
 	line = NULL;
-	while (get_next_line(0, &line) > 0)
+	while ((ret = vct_read_line_for_push_swap(STD_IN, &line)) > 0)
 	{
-		operation_checker(func_ptr, line, s, &count);
-		ft_strdel(&line);
+		ret = operation_checker(func_ptr, line, s, &count);
+		vct_del(&line);
+		if (ret == FAILURE)
+		{
+			vct_read_line_for_push_swap(CLEANUP, &line);
+			return (FAILURE);
+		}
 	}
+	if (ret == FAILURE)
+		ft_print_err_failure(INPUT_TOO_LONG, STD_ERR);
+	vct_read_line_for_push_swap(CLEANUP, &line);
+	return (ret);
 }
 
-void	operation_checker(operfunc *f_ptr, char *line, t_stack *s, size_t *count)
+int8_t	operation_checker(t_operfunc *f_ptr, t_vector *line, t_stack *s,
+							size_t *count)
 {
-	char		*oper[NB_OPE] = {SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR};
-	uint8_t 	i;
+	static char	*ope[NB_OPE] = {SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR};
+	uint8_t		i;
 
 	i = 0;
 	while (i < NB_OPE)
 	{
-		if (ft_strequ(line, oper[i]) == TRUE)
+		if (ft_strequ(vct_getstr(line), ope[i]) == TRUE)
 		{
 			f_ptr[i](s);
 			(*count)++;
@@ -46,8 +58,12 @@ void	operation_checker(operfunc *f_ptr, char *line, t_stack *s, size_t *count)
 		}
 		i++;
 	}
-	if (s->verbose == TRUE)
-		print_stack(s, i, *count);
 	if (i == NB_OPE)
-		ft_print_err_void("Wrong input", STD_ERR);
+		return (ft_print_err_failure(WRONG_OPE, STD_ERR));
+	if (s->verbose == TRUE)
+	{
+		print_stack(s, i, *count);
+		usleep(50000);
+	}
+	return (SUCCESS);
 }

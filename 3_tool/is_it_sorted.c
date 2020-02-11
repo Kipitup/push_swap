@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_chr_str.c                                      :+:      :+:    :+:   */
+/*   is_it_sorted.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 13:23:12 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/03 14:53:32 by amartino         ###   ########.fr       */
+/*   Created: 2020/02/11 17:30:18 by amartino          #+#    #+#             */
+/*   Updated: 2020/02/11 17:35:13 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "push_swap.h"
 
-ssize_t		vct_chr_str(t_vector *vector, char *find)
+int8_t		is_it_sorted(t_stack *s)
 {
-	size_t		index;
+	int32_t 	*sorted_stack;
+	size_t		i;
 	size_t		j;
 
-	index = 0;
-	while (index <= vector->len)
+	j = 0;
+	i = s->size_a - 1;
+	sorted_stack = ft_sort(s->a, s->size_a);
+	if (sorted_stack != NULL)
 	{
-		j = 0;
-		if (vector->str[index] == find[j])
+		while (i > 0 && j < s->size_a)
 		{
-			while (find[j] != '\0')
+			if (s->a[i] != sorted_stack[j])
 			{
-				if (vector->str[index] != find[j])
-					break ;
-				index++;
-				j++;
+				ft_memdel((void**)&sorted_stack);
+				return (FALSE);
 			}
-			if (find[j] == '\0')
-				return (index - j);
+			i--;
+			j++;
 		}
-		else
-			index++;
+		ft_memdel((void**)&sorted_stack);
+		return (TRUE);
 	}
 	return (FAILURE);
 }

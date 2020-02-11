@@ -6,57 +6,46 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:13:54 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/29 19:46:08 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/10 11:46:00 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_sublist_on_b(t_stack *s)
+void		selection_sort_sublist_on_b(t_stack *s, size_t size)
 {
-	while (s->size_b > 0)
+	if (size == (SUBLIST_MIN_SIZE / 2))
+	{
+		if (ft_high(s->a, s->size_a) == s->a[0] && s->size_a > SUBLIST_MIN_SIZE)
+			perfect_sort_for_3_on_top_of_a(s);
+		else
+			perfect_sort_for_3_at_the_bottom_of_a(s);
+	}
+	while (size > 0)
+	{
 		pa_highest(s, s->size_b);
+		size--;
+	}
 }
 
-void		sort_sublist_on_a(t_stack *s)
+int8_t		solve_when_too_small(t_stack *s)
 {
-	size_t 		limit;
-
-	if (ft_high(s->a, s->size_a) != s->a[0] && s->size_a > SUBLIST_MIN_SIZE)
+	if (s->size_a == 1)
+		return (SUCCESS);
+	else if (s->size_a == 2)
 	{
-		limit = SUBLIST_MIN_SIZE;
-		while (limit > 0)
-		{
-			rra(s);
-			limit--;
-		}
+		if (s->a[0] < s->a[1])
+			sa(s);
 	}
-	perfect_sort_for_3(s);
-}
-
-int8_t		push_next_sublist_on_a(t_stack *s, size_t size)
-{
-	size_t		max_size;
-	size_t		position;
-	ssize_t	 	pivot_index;
-
-
-	max_size = SUBLIST_MIN_SIZE * ft_pow_positive(2, (s->exponent_max - 1));
-	if (max_size == size)
-	{
-		position = s->size_b - size;
-		pivot_index = ft_get_n_smallest(s->b, position, START, s->size_b);
-		if (pivot_index == FAILURE)
-			return (ft_print_err_failure(MALLOC_PIVOT, STD_ERR));
-		pa_above_pivot(s, (size_t)pivot_index, s->size_b);
-	}
+	else if (s->size_a == 3)
+		perfect_sort_for_size_a_3(s);
 	else
 	{
-		while (size > 0)
-		{
-			pa(s);
-			size--;
-		}
+		if (pb_under_pivot(s, (s->size_a - 3), s->size_a) == FAILURE)
+			return (FAILURE);
+		perfect_sort_for_size_a_3(s);
+		while (s->size_b > 0)
+			pa_highest(s, s->size_b);
 	}
 	return (SUCCESS);
 }
