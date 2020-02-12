@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:30:18 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/11 20:41:32 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:15:45 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int8_t		is_it_sorted(t_stack *s)
 		ft_memdel((void**)&sorted_stack);
 		return (TRUE);
 	}
-	return (FAILURE);
+	return (ft_print_err_failure(MALLOC_ERR, STD_ERR));
 }

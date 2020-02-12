@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:59 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/10 19:44:25 by amartinod        ###   ########.fr       */
+/*   Updated: 2020/02/12 11:46:44 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,26 @@ uint8_t		check_no_double(t_stack *s)
 	return (TRUE);
 }
 
-uint8_t		check_for_bonus(char **av, char *chr)
+int8_t	check_for_bonus(char **av)
+{
+	size_t		i;
+	int8_t		ret;
+
+	ret = SUCCESS;
+	i = ft_isdigit((int)av[0][0]) == TRUE ? 1 : 2;
+	while (av[i] != '\0')
+	{
+		if ((ft_strequ(av[i], "-v") == TRUE) || (ft_strequ(av[i], "-c") == 1))
+		{
+			ret = FAILURE;
+			break ;
+		}
+		i++;
+	}
+	return (ret);
+}
+
+uint8_t		bonus(char **av, char *chr)
 {
 	uint8_t		ret;
 

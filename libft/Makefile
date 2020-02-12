@@ -6,7 +6,7 @@
 #    By: fkante <fkante@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/19 17:11:38 by fkante            #+#    #+#              #
-#    Updated: 2020/02/06 14:20:39 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/12 11:10:11 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,7 +156,8 @@ SRCS += vct_addstr_at.c
 SRCS += vct_chr.c
 SRCS += vct_chr_str.c
 SRCS += vct_getchar_at.c
-SRCS += vct_print.c
+SRCS += vct_print_fd.c
+SRCS += vct_print_fd_nl.c
 SRCS += vct_addnb.c
 SRCS += vct_chr_count.c
 SRCS += vct_chr_str_count.c

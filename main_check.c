@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:57:10 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/11 17:34:25 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:15:50 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void		check(t_stack *s, int ac, char **av)
 			ft_printf("OK\n");
 		else if (ret == FALSE)
 			ft_printf("KO\n");
-		else
-			ft_print_err_void(MALLOC_ERR, STD_ERR);
 		clean_struct(&s);
 	}
 }

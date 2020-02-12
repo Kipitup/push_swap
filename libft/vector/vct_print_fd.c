@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vct_print.c                                        :+:      :+:    :+:   */
+/*   vct_print_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 15:00:45 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/11 12:10:58 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:10:26 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
 /*
-**	Print the vector and a new line
+**	Print the vector on the given file descriptor
 */
 
-void	vct_print(t_vector *vector)
+ssize_t	vct_print_fd(t_vector *vector, ssize_t fd)
 {
+	ssize_t	ret;
+
+	ret = FAILURE;
 	if (vector != NULL && vector->str != NULL)
-	{
-		write(1, vector->str, vector->len);
-		write(1, "\n", 1);
-	}
+		ret = write(fd, vector->str, vector->len);
+	return (ret);
 }

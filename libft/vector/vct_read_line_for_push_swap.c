@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 15:08:41 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/11 12:12:44 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:15:04 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int8_t		read_file_ps(t_vector *vector, t_vector **line, const int fd)
 	char		buff[BUFF_SIZE + 1];
 
 	ret = read(fd, &buff, BUFF_SIZE);
+	if (ret == FAILURE)
+		return (FAILURE);
 	buff[ret] = '\0';
 	if (vct_addnstr(vector, buff, ret) == FAILURE)
 		return (FAILURE);
