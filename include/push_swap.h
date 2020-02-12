@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 11:43:45 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 14:27:23 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ uint8_t			check_no_double(t_stack *s);
 ssize_t			parse_args(char **av, int32_t ac);
 int8_t			check_err(char *str, size_t j);
 uint8_t			bonus(char **av, char *chr);
-int8_t			check_for_bonus(char **av);
+int8_t			check_for_bonus(char **av, size_t len);
 
 /*
 ** ############################################################################

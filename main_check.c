@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:57:10 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/12 11:15:50 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:42:37 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ void		check(t_stack *s, int ac, char **av)
 		if (ret == SUCCESS)
 			ret = is_it_sorted(s);
 		if (ret == TRUE)
-			ft_printf("OK\n");
+		{
+			if ((ret = write(STD_OUT, "OK\n", 3)) == FAILURE)
+				ft_print_err_void(STD_OUT_CLOSE, STD_ERR);
+		}
 		else if (ret == FALSE)
-			ft_printf("KO\n");
+		{
+			if ((ret = write(STD_OUT, "KO\n", 3)) == FAILURE)
+				ft_print_err_void(STD_OUT_CLOSE, STD_ERR);	
+		}
 		clean_struct(&s);
 	}
 }

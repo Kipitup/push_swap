@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 10:39:19 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 11:19:38 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:49:42 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int8_t	operation_checker(t_operfunc *f_ptr, t_vector *line, t_stack *s,
 		}
 		i++;
 	}
-	if (i == NB_OPE)
+	if (i == NB_OPE || (i < 8 && line->len > 2) || (i > 7 && line->len > 3))
 		return (ft_print_err_failure(WRONG_OPE, STD_ERR));
 	if (s->verbose == TRUE)
 	{

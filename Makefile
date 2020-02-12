@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/02/11 17:35:02 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/12 11:54:49 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -153,13 +153,13 @@ run: all
 	ls -t result
 
 clean:
-	rm -f $(OBJS)
-	rm -rf ./$(BUILD_DIR)
+	$(RM) $(OBJS)
+	$(RM) -R ./$(BUILD_DIR)
 	echo "$(YELLOW)OBJS$(END) \t\t were \t\t $(GREEN)clean$(END)\n"
 	$(MAKE) clean -C $(LIB_DIR)
 
 fclean: clean
-	rm -rf $(NAME_PUSH_SWP) $(NAME_CHECKER) $(MAIN_PUSH).o $(MAIN_CHECK).o
+	$(RM) -R $(NAME_PUSH_SWP) $(NAME_CHECKER) $(MAIN_PUSH).o $(MAIN_CHECK).o
 	echo "$(YELLOW)$(NAME_PUSH_SWP)$(END) and $(YELLOW)$(NAME_CHECKER)$(END) \t were \t $(GREEN)clean$(END)\n"
 	$(MAKE) fclean -C $(LIB_DIR)
 

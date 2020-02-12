@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:26:28 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/11 17:08:44 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 11:58:00 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	swap_stack_a(t_stack *s)
 	int32_t	tmp;
 	size_t	top;
 
-	if (s->size_a > 0)
+	if (s->size_a > 1)
 	{
 		top = s->size_a - 1;
 		tmp = s->a[top];
@@ -32,7 +32,7 @@ void	swap_stack_b(t_stack *s)
 	int32_t	tmp;
 	size_t	top;
 
-	if (s->size_b > 0)
+	if (s->size_b > 1)
 	{
 		top = s->size_b - 1;
 		tmp = s->b[top];

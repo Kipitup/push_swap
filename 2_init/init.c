@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:43 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 11:39:12 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 14:27:10 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_stack		*create_stack(char **av, size_t len)
 	ssize_t		start;
 
 	s = NULL;
-	if (check_for_bonus(av) == FAILURE)
+	if (check_for_bonus(av, len) == FAILURE)
 		return (ft_print_err_null(WRONG_BONUS, STD_ERR));
 	start = parse_args(av, len);
 	if (start == FAILURE)

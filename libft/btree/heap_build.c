@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 11:15:55 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/11 12:33:28 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 12:05:16 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,20 @@ t_heap	*heap_tree(int32_t *tab, size_t size, uint8_t type)
 {
 	t_heap		*heap;
 
-	heap = ft_memalloc(sizeof(t_heap));
-	if (heap != NULL)
-		heap->a = ft_memalloc(sizeof(int32_t) * (size + 1));
-	if (heap == NULL || heap->a == NULL)
-		ft_memdel((void**)&heap);
-	else
+	heap = NULL;
+	if (size > 0)
 	{
-		heap->type = type;
-		heap->a[HEAP_SIZE] = 0;
-		fill_tree(heap, tab, size);
+		heap = ft_memalloc(sizeof(t_heap));
+		if (heap != NULL)
+			heap->a = ft_memalloc(sizeof(int32_t) * (size + 1));
+		if (heap == NULL || heap->a == NULL)
+			ft_memdel((void**)&heap);
+		else
+		{
+			heap->type = type;
+			heap->a[HEAP_SIZE] = 0;
+			fill_tree(heap, tab, size);
+		}	
 	}
 	return (heap);
 }
