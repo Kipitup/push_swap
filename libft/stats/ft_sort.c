@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 12:38:52 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 12:12:20 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 15:10:43 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int32_t				*ft_sort(int32_t *tab, size_t size)
 			delete_root(heap);
 			i++;
 		}
-		clean_heap_tree(&heap);	
+		clean_heap_tree(&heap);
 	}
 	return (sorted_array);
 }

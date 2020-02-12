@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 11:15:55 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 12:05:16 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 15:11:04 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_heap	*heap_tree(int32_t *tab, size_t size, uint8_t type)
 			heap->type = type;
 			heap->a[HEAP_SIZE] = 0;
 			fill_tree(heap, tab, size);
-		}	
+		}
 	}
 	return (heap);
 }

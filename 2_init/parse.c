@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:59 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 14:52:14 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 15:11:18 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ uint8_t		check_no_double(t_stack *s)
 	return (TRUE);
 }
 
-int8_t	check_for_bonus(char **av, size_t len)
+int8_t		check_for_bonus(char **av, size_t len)
 {
 	size_t		i;
 	int8_t		ret;
