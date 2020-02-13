@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 11:16:29 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 13:41:17 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:24:56 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define STACK_B			1
 # define NONE				-1
 # define EXP_0				0
+# define INTMIN_LEN			11
+# define INTMAX_LEN			10
 
 # define SA					"sa"
 # define SB					"sb"

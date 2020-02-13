@@ -6,7 +6,7 @@
 #    By: amartino <amartino@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/26 11:56:39 by amartino          #+#    #+#              #
-#    Updated: 2020/02/12 11:54:49 by amartino         ###   ########.fr        #
+#    Updated: 2020/02/12 17:06:14 by amartino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
                      ####################################
@@ -155,6 +155,7 @@ run: all
 clean:
 	$(RM) $(OBJS)
 	$(RM) -R ./$(BUILD_DIR)
+	$(RM) -R $(MAIN_PUSH).o $(MAIN_CHECK).o
 	echo "$(YELLOW)OBJS$(END) \t\t were \t\t $(GREEN)clean$(END)\n"
 	$(MAKE) clean -C $(LIB_DIR)
 

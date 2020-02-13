@@ -6,7 +6,7 @@
 /*   By: fkante <fkante@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:57:10 by fkante            #+#    #+#             */
-/*   Updated: 2020/02/12 15:10:19 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:27:50 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,5 @@ int			main(int ac, char **av)
 		--ac;
 		check(s, ac, av);
 	}
-	else
-		ft_print_err_false("Not enough arguments", STD_ERR);
 	return (SUCCESS);
 }

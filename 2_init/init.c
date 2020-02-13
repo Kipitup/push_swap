@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:43 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 14:27:10 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/13 16:28:09 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,28 @@ void		fill_in_static_variable(t_stack *s, char **tab, size_t size)
 		s->exponent_max++;
 }
 
+int8_t		check_int_extremum(char *str)
+{
+	size_t	i;
+	size_t	len;
+	int8_t	ret;
+
+	i = 0;
+	ret = SUCCESS;
+	len = ft_strlen(str);
+	if (len > INTMIN_LEN)
+	{
+		if (str[i] == '-')
+			i++;
+		while (str[i] != '\0' && str[i] == '0')
+			i++;
+		len = ft_strlen(str + i);
+		if (len > INTMAX_LEN)
+			ret = FAILURE;
+	}
+	return (ret);
+}
+
 t_stack		*fill_stack(t_stack *s, size_t start, char **av, size_t len)
 {
 	int64_t		tmp;
@@ -32,7 +54,7 @@ t_stack		*fill_stack(t_stack *s, size_t start, char **av, size_t len)
 	{
 		len--;
 		tmp = ft_atol(av[len]);
-		if (tmp > INT_MAX || tmp < INT_MIN)
+		if (tmp > INT_MAX || tmp < INT_MIN || check_int_extremum(av[len]) == -1)
 			clean_struct(&s);
 		else
 			s->a[i] = (int)tmp;

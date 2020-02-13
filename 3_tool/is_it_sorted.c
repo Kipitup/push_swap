@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 17:30:18 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 12:11:06 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:49:35 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int8_t		is_it_sorted(t_stack *s)
 
 	j = 0;
 	i = (s->size_a > 0) ? s->size_a - 1 : s->size_a;
+	if (s->size_b > 0)
+		return (FALSE);
 	sorted_stack = ft_sort(s->a, s->size_a);
 	if (sorted_stack != NULL)
 	{
@@ -36,7 +38,5 @@ int8_t		is_it_sorted(t_stack *s)
 		ft_memdel((void**)&sorted_stack);
 		return (TRUE);
 	}
-	else if (s->size_b > 0)
-		return (FALSE);
 	return (ft_print_err_failure(MALLOC_ERR, STD_ERR));
 }
