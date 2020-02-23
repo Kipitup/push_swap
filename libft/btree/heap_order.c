@@ -6,19 +6,28 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 11:03:55 by amartino          #+#    #+#             */
-/*   Updated: 2019/12/01 14:10:31 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/21 08:54:02 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "btree.h"
 
+void	swap(t_heap *heap, size_t parent, size_t child)
+{
+	int32_t		tmp;
+
+	tmp = heap->A[parent];
+	heap->A[parent] = heap->A[child];
+	heap->A[child] = tmp;
+}
+
 void 	is_parent_valid(t_heap *heap, size_t child)
 {
 	size_t		parent;
 
-	parent = get_parent(child);
+	parent = get_heap_parent(child);
 	if ((heap->type == MIN_HEAP && heap->A[parent] > heap->A[child]) == TRUE
-		|| (heap->type == MAX_HEAP && heap->A[parent] < heap->A[child]) == TRUE)
+	 || (heap->type == MAX_HEAP && heap->A[parent] < heap->A[child]) == TRUE)
 	{
 		swap(heap, parent, child);
 		is_parent_valid(heap, parent);

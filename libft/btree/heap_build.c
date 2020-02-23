@@ -6,19 +6,13 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 11:15:55 by amartino          #+#    #+#             */
-/*   Updated: 2020/01/15 12:05:47 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/21 09:06:29 by amartinod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "btree.h"
 
-void	clean_heap_tree(t_heap **heap)
-{
-	ft_memdel((void**)&((*heap)->A));
-	ft_memdel((void**)heap);
-}
-
-void	insert(t_heap *heap, int32_t nb, size_t index)
+void	insert_node(t_heap *heap, int32_t nb, size_t index)
 {
 	heap->A[index] = nb;
 	heap->A[HEAP_SIZE]++;
@@ -47,10 +41,10 @@ void	fill_tree(t_heap *heap, int32_t *tab, size_t size)
 	heap->A[HEAP_SIZE]++;;
 	while (i < size)
 	{
-		insert(heap, tab[i], get_left_child(parent_index));
+		insert_node(heap, tab[i], get_left_child(parent_index));
 		i++;
 		if (i < size)
-			insert(heap, tab[i], get_right_child(parent_index));
+			insert_node(heap, tab[i], get_right_child(parent_index));
 		i++;
 		parent_index++;
 	}
