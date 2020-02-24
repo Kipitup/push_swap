@@ -6,7 +6,7 @@
 /*   By: amartino <amartino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:32:59 by amartino          #+#    #+#             */
-/*   Updated: 2020/02/12 15:11:18 by amartino         ###   ########.fr       */
+/*   Updated: 2020/02/24 10:49:36 by amartino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int8_t		check_for_bonus(char **av, size_t len)
 	int8_t		ret;
 
 	ret = SUCCESS;
-	if (av[0] != '\0')
+	if (av[0] != NULL)
 	{
 		i = ft_isdigit((int)av[0][0]) == TRUE ? 1 : 2;
 		while (i < len)
